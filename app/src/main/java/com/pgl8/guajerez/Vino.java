@@ -4,41 +4,34 @@ package com.pgl8.guajerez;
  * Created by WINDOWS 7 on 11/02/2015.
  */
 public class Vino {
-    private String notasCata_;
-    private String elaboracion_;
-    private String parametros_;
-    private String consumo_;
-    private String URL;
-
-    //consturctor sin parámetros
-    public Vino() {
-        super();
-    }
+    private String mNotasCata;
+    private String mElaboracion;
+    private String mParametros;
+    private String mConsumo;
 
     //constructor por defecto
-    public Vino(String notasCata, String elaboracion, String parametros, String consumo) {
-        super();
-        this.notasCata_ = notasCata;
-        this.elaboracion_ = elaboracion;
-        this.parametros_ = parametros;
-        this.consumo_ = consumo;
-
+    public Vino(String notasCata, String parametros, String elaboracion, String consumo) {
+        this.mNotasCata = notasCata;
+        this.mParametros = parametros;
+        this.mElaboracion = elaboracion;
+        this.mConsumo = consumo;
     }
 
     //métodos observadores
-    final String getNotasCata() {
-        return notasCata_;
+
+    public String getNotasCata() {
+        return mNotasCata;
     }
 
-    final String getElaboracion() {
-        return elaboracion_;
+    public String getElaboracion() {
+        return mElaboracion;
     }
 
-    final String getParametros() {
-        return parametros_;
+    public String getParametros() {
+        return mParametros;
     }
 
-    final String getConsumo() {
-        return consumo_;
+    public String getConsumo() {
+        return mConsumo;
     }
 }
