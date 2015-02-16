@@ -24,6 +24,7 @@ public class InfoVinosActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_vinos);
+        setTitle("");
         Bundle bundle = getIntent().getExtras();
         new obtenerHTML(bundle.getInt("posicion")).execute();
     }
@@ -55,7 +56,6 @@ public class InfoVinosActivity extends ActionBarActivity {
     //Haremos una clase interna para ello
     class obtenerHTML extends AsyncTask<String, Void, Elements> {
         private static final String TAG = "Principal";
-        private final int posicion;
         private String[] vinos = {"Fino", "Manzanilla", "Amontillado", "Oloroso", "Palo Cortado", "Pale Cream",
                 "Medium", "Cream", "Moscatel", "Pedro Ximenez"};
         private String titulo;
@@ -63,7 +63,6 @@ public class InfoVinosActivity extends ActionBarActivity {
         ScrollView scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         public obtenerHTML(int posicion) {
-            this.posicion = posicion;
             this.titulo = vinos[posicion];
         }
 
@@ -107,15 +106,15 @@ public class InfoVinosActivity extends ActionBarActivity {
 
         protected void onPostExecute(Elements result) {
             if (result != null) {
+                //Asignamos el título de la activity
+                setTitle(getTitulo());
                 //Localizamos e inicializamos los elementos de la UI
-                TextView txt0 = (TextView) findViewById(R.id.textView);
                 TextView txt1 = (TextView) findViewById(R.id.textView3);
                 TextView txt2 = (TextView) findViewById(R.id.textView5);
                 TextView txt3 = (TextView) findViewById(R.id.textView7);
                 TextView txt4 = (TextView) findViewById(R.id.textView9);
 
                 //Asignamos los elementos al objeto de la UI determinado
-                txt0.setText(getTitulo());
                 txt1.setText(result.get(0).text());
                 txt2.setText(result.get(1).text());
                 txt3.setText(result.get(3).text());
