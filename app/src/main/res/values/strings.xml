@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Guía Jerez</string>
+    <string name="hello_world">¡Hola Android!</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="title_activity_vinos">Vinos</string>
+    <string name="title_activity_info_vinos">InfoVinosActivity</string>
+
+</resources>
