@@ -19,6 +19,7 @@ public class activityVinos extends ActionBarActivity implements CustomAdapter.Cl
     private RecyclerView.LayoutManager layoutManager;
     private CustomAdapter adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +92,9 @@ public class activityVinos extends ActionBarActivity implements CustomAdapter.Cl
 
     @Override
     public void itemClicked(View view, int position) {
-        startActivity(new Intent(this, InfoVinosActivity.class));
+        Intent intent = new Intent(this, InfoVinosActivity.class);
+        intent.putExtra("posicion", position);
+        startActivity(intent);
+        //Log.e("ActivityVinos", "Posicion->"+position);
     }
 }

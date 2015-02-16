@@ -46,10 +46,6 @@
                     android:textColor="#ff3781bc"
                     android:textStyle="bold"/>
 
-                <View
-                    android:layout_height="40dp"
-                    />
-
             </TableRow>
 
             <TableRow

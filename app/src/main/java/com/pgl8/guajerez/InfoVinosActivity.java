@@ -1,8 +1,8 @@
 package com.pgl8.guajerez;
 
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+
 import java.io.IOException;
 
 
@@ -22,6 +24,8 @@ public class InfoVinosActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_vinos);
+        Bundle bundle = getIntent().getExtras();
+        new obtenerHTML(bundle.getInt("posicion")).execute();
     }
 
 
@@ -50,11 +54,26 @@ public class InfoVinosActivity extends ActionBarActivity {
     //Necesita ser una tarea asíncrona
     //Haremos una clase interna para ello
     class obtenerHTML extends AsyncTask<String, Void, Elements> {
-        //private int cont=0;
-        //private String html1, html2, html3;
         private static final String TAG = "Principal";
+        private final int posicion;
+        private String[] vinos = {"Fino", "Manzanilla", "Amontillado", "Oloroso", "Palo Cortado", "Pale Cream",
+                "Medium", "Cream", "Moscatel", "Pedro Ximenez"};
+        private String titulo;
         LinearLayout linlaHeaderProgress = (LinearLayout) findViewById(R.id.linlaHeaderProgress);
         ScrollView scrollView = (ScrollView) findViewById(R.id.scrollView);
+
+        public obtenerHTML(int posicion) {
+            this.posicion = posicion;
+            this.titulo = vinos[posicion];
+        }
+
+        /*final int getPosicion() {
+            return posicion;
+        }*/
+
+        final String getTitulo() {
+            return titulo;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -68,9 +87,14 @@ public class InfoVinosActivity extends ActionBarActivity {
             //Método de obtención con JSOUP
             Elements contenido;
             try {
-                Document doc = Jsoup.connect("http://www.sherry.org/es/fichafino.cfm").get();
-                contenido = doc.select("div.blanco");
-                //Log.v(TAG, contenido.get(2).html().replaceAll("<br>","\n"));
+                if (getTitulo().equals("Palo Cortado")) {
+                    Document doc = Jsoup.connect("http://www.sherry.org/es/fichapaloc.cfm").get();
+                    contenido = doc.select("div.blanco");
+                } else {
+                    Document doc = Jsoup.connect("http://www.sherry.org/es/ficha" + getTitulo().toLowerCase().replace(" ", "") + ".cfm").get();
+                    contenido = doc.select("div.blanco");
+                }
+                //Log.v(TAG, "http://www.sherry.org/es/ficha" + titulo.toLowerCase().replace(" ", "") + ".cfm");
 
             } catch (IOException e) {
                 //e.printStackTrace();
@@ -84,12 +108,14 @@ public class InfoVinosActivity extends ActionBarActivity {
         protected void onPostExecute(Elements result) {
             if (result != null) {
                 //Localizamos e inicializamos los elementos de la UI
+                TextView txt0 = (TextView) findViewById(R.id.textView);
                 TextView txt1 = (TextView) findViewById(R.id.textView3);
                 TextView txt2 = (TextView) findViewById(R.id.textView5);
                 TextView txt3 = (TextView) findViewById(R.id.textView7);
                 TextView txt4 = (TextView) findViewById(R.id.textView9);
 
                 //Asignamos los elementos al objeto de la UI determinado
+                txt0.setText(getTitulo());
                 txt1.setText(result.get(0).text());
                 txt2.setText(result.get(1).text());
                 txt3.setText(result.get(3).text());
