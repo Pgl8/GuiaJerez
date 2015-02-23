@@ -5,6 +5,7 @@
     <string name="hello_world">¡Hola Android!</string>
     <string name="action_settings">Ajustes</string>
     <string name="title_activity_vinos">Vinos</string>
-    <string name="title_activity_info_vinos">InfoVinosActivity</string>
+    <string name="title_activity_info_vinos">Información</string>
+    <string name="title_activity_mapa">Mapa</string>
 
 </resources>

@@ -39,8 +39,13 @@ public class activityPrincipal extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Inicia la actividad de vinos
     public void activityVinos(View view) {
         startActivity(new Intent(this, activityVinos.class));
+    }
 
+    //Inicia la actividad de mapa
+    public void activityMapa(View view) {
+        startActivity(new Intent(this, activityMapa.class));
     }
 }
