@@ -96,7 +96,8 @@ public class InfoVinosActivity extends ActionBarActivity {
                 //Log.v(TAG, "http://www.sherry.org/es/ficha" + titulo.toLowerCase().replace(" ", "") + ".cfm");
 
             } catch (IOException e) {
-                //e.printStackTrace();
+                //TODO: Añadir dialog conexión
+                e.printStackTrace();
                 Log.e(TAG, "Error al cargar contenido", e);
                 return null;
             }
