@@ -10,7 +10,7 @@ public class Vino {
     private String mConsumo;
 
     //constructor por defecto
-    public Vino(String notasCata, String parametros, String elaboracion, String consumo) {
+    public Vino(String notasCata, String elaboracion, String consumo, String parametros) {
         this.mNotasCata = notasCata;
         this.mParametros = parametros;
         this.mElaboracion = elaboracion;

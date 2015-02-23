@@ -114,14 +114,15 @@ public class InfoVinosActivity extends ActionBarActivity {
                 TextView txt3 = (TextView) findViewById(R.id.textView7);
                 TextView txt4 = (TextView) findViewById(R.id.textView9);
 
-                //Asignamos los elementos al objeto de la UI determinado
-                txt1.setText(result.get(0).text());
-                txt2.setText(result.get(1).text());
-                txt3.setText(result.get(3).text());
+                //Creamos el objeto correspondiente con un poco de formateo del parser
+                Vino vino = new Vino(result.get(0).text(), result.get(1).text(), result.get(3).text(),
+                        Jsoup.parse(result.get(2).html().replaceAll("(?i)<br[^>]*>", "<pre>\n</pre>")).text());
 
-                //Formateo para respetar saltos de línea en datos analíticos
-                txt4.setText(Jsoup.parse(result.get(2).html().replaceAll("(?i)<br[^>]*>",
-                        "<pre>\n</pre>")).text());
+                //Asignamos los elementos al objeto de la UI determinado
+                txt1.setText(vino.getNotasCata());
+                txt2.setText(vino.getElaboracion());
+                txt3.setText(vino.getConsumo());
+                txt4.setText(vino.getParametros());
 
                 //Quitamos Progress circle
                 linlaHeaderProgress.setVisibility(View.GONE);
