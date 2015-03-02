@@ -18,7 +18,7 @@ import java.util.List;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private LayoutInflater inflater;
     private Context context;
-    private ClickListener clickListener;
+    //private ClickListener clickListener;
     List<CustomList> data = Collections.emptyList();
 
     //Constructor
@@ -44,36 +44,36 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     }
 
-    public void setClickListener(ClickListener clickListener){
+    /*public void setClickListener(ClickListener clickListener){
         this.clickListener = clickListener;
-    }
+    }*/
 
     @Override
     public int getItemCount() {
         return data.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView icono;
         TextView titulo;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
             titulo = (TextView) itemView.findViewById(R.id.listText);
             icono = (ImageView) itemView.findViewById(R.id.listIcon);
         }
 
-        @Override
+        /*@Override
         public void onClick(View v) {
             //context.startActivity(new Intent(context, InfoVinosActivity.class));
             if(clickListener != null) {
                 clickListener.itemClicked(v, getPosition());
             }
-        }
+        }*/
     }
 
-    public interface ClickListener{
+    /*public interface ClickListener{
         public void itemClicked(View view, int position);
-    }
+    }*/
 }
