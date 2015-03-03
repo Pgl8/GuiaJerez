@@ -1,16 +1,13 @@
 package com.pgl8.guajerez;
 
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.LatLng;
 
 
 public class activityMapa extends ActionBarActivity {
@@ -39,9 +36,9 @@ public class activityMapa extends ActionBarActivity {
         uiSettings.setAllGesturesEnabled(true);
 
         //Centramos el mapa en la posicion del usuario NO FUNCIONA
-        Location location = googleMap.getMyLocation();
+        /*Location location = googleMap.getMyLocation();
         LatLng latlon = new LatLng(location.getLatitude(), location.getLongitude());
-        CameraUpdateFactory.newLatLng(latlon);
+        CameraUpdateFactory.newLatLng(latlon);*/
     }
 
     @Override

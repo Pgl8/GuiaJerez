@@ -54,7 +54,11 @@
         </activity>
         <activity
             android:name=".activityMapa"
-            android:label="@string/title_activity_mapa">
+            android:label="@string/title_activity_mapa"
+            android:parentActivityName=".activityPrincipal">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activityPrincipal"/>
         </activity>
     </application>
 
