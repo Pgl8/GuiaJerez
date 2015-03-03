@@ -13,7 +13,6 @@ import com.google.android.gms.maps.UiSettings;
 public class activityMapa extends ActionBarActivity {
 
     GoogleMap googleMap;
-    //MapView mapView;
     MapFragment mapFragment;
     UiSettings uiSettings;
     //private static final String TAG = "MyActivity";
@@ -22,23 +21,20 @@ public class activityMapa extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
-        //Inicializamos el MapFragment
+
+        // inicializamos el MapFragment
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
 
-        //Obtenemos el mapa y activamos localización
+        // obtenemos el mapa y activamos localización
         googleMap = mapFragment.getMap();
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.setMyLocationEnabled(true);
 
-        //Activamos los elementos de la interfaz de usuario
+        // activamos los elementos de la interfaz de usuario del mapa
         uiSettings = googleMap.getUiSettings();
         uiSettings.setZoomControlsEnabled(true);
         uiSettings.setAllGesturesEnabled(true);
 
-        //Centramos el mapa en la posicion del usuario NO FUNCIONA
-        /*Location location = googleMap.getMyLocation();
-        LatLng latlon = new LatLng(location.getLatitude(), location.getLongitude());
-        CameraUpdateFactory.newLatLng(latlon);*/
     }
 
     @Override
