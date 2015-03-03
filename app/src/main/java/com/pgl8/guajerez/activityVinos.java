@@ -29,24 +29,22 @@ public class activityVinos extends ActionBarActivity {
         setContentView(R.layout.activity_vinos);
         recyclerView = (RecyclerView) findViewById(R.id.vinosList);
 
-
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
+        // Opción para aumentar la eficiencia del mapa
         recyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
+        // Obtenemos y asignamos el linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // setting the items decoration
+        // asignamos la decoración de los objetos del recycler view
         recyclerView.addItemDecoration(new DividerItemDecoration(this, null));
 
-        // specify an adapter (see also next example)
+        // especificamos un adaptador y el listener del click
         adapter = new CustomAdapter(this, getData());
-        //adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
+
+            // función que es llamada cuando se produce un click e inicializa la actividad pertinente
             @Override
             public void onClick(View view, int position) {
                 Intent intent = new Intent(getBaseContext(), InfoVinosActivity.class);
@@ -55,12 +53,11 @@ public class activityVinos extends ActionBarActivity {
             }
 
             @Override
-            public void onLongClick(View view, int position) {
-
-            }
+            public void onLongClick(View view, int position) { }
         }));
     }
 
+    //Función que obtiene la lista de objetos para el recycler view
     public static List<CustomList> getData() {
         List<CustomList> data = new ArrayList<>();
         int[] icons = {R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher,
@@ -77,12 +74,6 @@ public class activityVinos extends ActionBarActivity {
         }
         return data;
     }
-
-    /*@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate()
-        return super.onCreateView(parent, name, context, attrs);
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -106,19 +97,13 @@ public class activityVinos extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*@Override
-    public void itemClicked(View view, int position) {
-        Intent intent = new Intent(this, InfoVinosActivity.class);
-        intent.putExtra("posicion", position);
-        startActivity(intent);
-        //Log.e("ActivityVinos", "Posicion->"+position);
-    }*/
-
+    //Clase interna que implementa el click en el recycler view
     static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
-
+        //Declaramos las variables
         private GestureDetector gestureDetector;
         private ClickListener clickListener;
 
+        //Constructor que recibe 3 parámetros
         public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
@@ -138,6 +123,7 @@ public class activityVinos extends ActionBarActivity {
 
         }
 
+        //Función que detecta el click
         @Override
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
             View child = rv.findChildViewUnder(e.getX(), e.getY());
@@ -148,14 +134,12 @@ public class activityVinos extends ActionBarActivity {
         }
 
         @Override
-        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-        }
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) { }
     }
 
+    //Interfaz destinada a ejecutar los eventos de click simple y click largo
     public static interface ClickListener {
         public void onClick(View view, int position);
-
         public void onLongClick(View view, int position);
     }
 }
