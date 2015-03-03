@@ -21,14 +21,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     //private ClickListener clickListener;
     List<CustomList> data = Collections.emptyList();
 
-    //Constructor
+    // constructor predeterminado con dos parámetros
     public CustomAdapter(Context context, List<CustomList> data){
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.data = data;
     }
 
-
+    // función que crea el viewholder para el adaptador
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int i) {
         View view = inflater.inflate(R.layout.custom_row, parent, false);
@@ -36,44 +36,30 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return holder;
     }
 
+    // función que vincula los elementos de la lista a los de la vista
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int position) {
         CustomList current = data.get(position);
         viewHolder.titulo.setText(current.title);
         viewHolder.icono.setImageResource(current.iconId);
-
     }
 
-    /*public void setClickListener(ClickListener clickListener){
-        this.clickListener = clickListener;
-    }*/
-
+    // función que devuelve el tamaño de la lista
     @Override
     public int getItemCount() {
         return data.size();
     }
 
+    // clase interna que extiende el recycler view, necesaria para localizar los elementos de la UI
     class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView icono;
         TextView titulo;
 
+        // constructor predeterminado de un único parámetro
         public MyViewHolder(View itemView) {
             super(itemView);
-            //itemView.setOnClickListener(this);
             titulo = (TextView) itemView.findViewById(R.id.listText);
             icono = (ImageView) itemView.findViewById(R.id.listIcon);
         }
-
-        /*@Override
-        public void onClick(View v) {
-            //context.startActivity(new Intent(context, InfoVinosActivity.class));
-            if(clickListener != null) {
-                clickListener.itemClicked(v, getPosition());
-            }
-        }*/
     }
-
-    /*public interface ClickListener{
-        public void itemClicked(View view, int position);
-    }*/
 }
