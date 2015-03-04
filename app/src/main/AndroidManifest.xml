@@ -32,13 +32,13 @@
     <!-- Only required by tracking types such as SLAM, GPSCompass etc.. -->
     <uses-feature
         android:name="android.hardware.sensor.accelerometer"
-        android:required="false"/>
+        android:required="true"/>
     <uses-feature
         android:name="android.hardware.sensor.compass"
-        android:required="false"/>
+        android:required="true"/>
     <uses-feature
         android:name="android.hardware.sensor.gyroscope"
-        android:required="false"/>
+        android:required="true"/>
 
     <application
         android:allowBackup="true"

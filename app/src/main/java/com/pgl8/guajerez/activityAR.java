@@ -144,7 +144,7 @@ public class activityAR extends ARViewActivity {
 
         File metaioManModel =
                 AssetsManager.getAssetPathAsFile(getApplicationContext(),
-                        "assets/metaioman.md2");
+                        "metaioman.md2");
         if (metaioManModel != null) {
             mMunichGeo = metaioSDK.createGeometry(metaioManModel);
             if (mMunichGeo != null) {
@@ -159,9 +159,9 @@ public class activityAR extends ARViewActivity {
         // create radar
         mRadar = metaioSDK.createRadar();
         mRadar.setBackgroundTexture(AssetsManager.getAssetPathAsFile(getApplicationContext(),
-                "assets/radar.png"));
+                "radar.png"));
         mRadar.setObjectsDefaultTexture(AssetsManager.getAssetPathAsFile(getApplicationContext(),
-                "assets/yellow.png"));
+                "yellow.png"));
         mRadar.setRelativeToScreen(IGeometry.ANCHOR_TL);
 
         // add geometries to the radar
@@ -173,7 +173,7 @@ public class activityAR extends ARViewActivity {
     }
 
     private IGeometry createPOIGeometry(LLACoordinate lla) {
-        final File path = AssetsManager.getAssetPathAsFile(getApplicationContext(), "assets/ExamplePOI.obj");
+        final File path = AssetsManager.getAssetPathAsFile(getApplicationContext(), "ExamplePOI.obj");
         if (path != null) {
             IGeometry geo = metaioSDK.createGeometry(path);
             geo.setTranslationLLA(lla);
@@ -194,9 +194,9 @@ public class activityAR extends ARViewActivity {
             @Override
             public void run() {
                 mRadar.setObjectsDefaultTexture(AssetsManager.getAssetPathAsFile(getApplicationContext(),
-                        "assets/yellow.png"));
+                        "yellow.png"));
                 mRadar.setObjectTexture(geometry, AssetsManager.getAssetPathAsFile(getApplicationContext(),
-                        "assets/red.png"));
+                        "red.png"));
                 mAnnotatedGeometriesGroup.setSelectedGeometry(geometry);
             }
         });
