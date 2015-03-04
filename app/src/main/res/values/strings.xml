@@ -7,5 +7,6 @@
     <string name="title_activity_vinos">Vinos</string>
     <string name="title_activity_info_vinos">Información</string>
     <string name="title_activity_mapa">Mapa</string>
+    <string name="title_activity_activity_ar">activityAR</string>
 
 </resources>
