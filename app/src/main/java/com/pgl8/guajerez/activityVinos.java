@@ -37,7 +37,7 @@ public class activityVinos extends ActionBarActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // asignamos la decoración de los objetos del recycler view
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, null));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this));
 
         // especificamos un adaptador y el listener del click
         adapter = new CustomAdapter(this, getData());
