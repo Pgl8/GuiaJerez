@@ -46,7 +46,7 @@ public class activityVinos extends ActionBarActivity {
             // función que es llamada cuando se produce un click e inicializa la actividad pertinente
             @Override
             public void onClick(View view, int position) {
-                Intent intent = new Intent(getBaseContext(), InfoVinosActivity.class);
+                Intent intent = new Intent(getBaseContext(), activityInfoVinos.class);
                 intent.putExtra("posicion", position);
                 startActivity(intent);
             }

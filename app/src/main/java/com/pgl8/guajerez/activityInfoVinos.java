@@ -18,7 +18,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 
-public class InfoVinosActivity extends ActionBarActivity {
+public class activityInfoVinos extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
