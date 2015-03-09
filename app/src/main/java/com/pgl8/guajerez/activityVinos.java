@@ -43,7 +43,6 @@ public class activityVinos extends ActionBarActivity {
         adapter = new CustomAdapter(this, getData());
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
-
             // función que es llamada cuando se produce un click e inicializa la actividad pertinente
             @Override
             public void onClick(View view, int position) {
@@ -53,7 +52,9 @@ public class activityVinos extends ActionBarActivity {
             }
 
             @Override
-            public void onLongClick(View view, int position) { }
+            public void onLongClick(View view, int position) {
+
+            }
         }));
     }
 
