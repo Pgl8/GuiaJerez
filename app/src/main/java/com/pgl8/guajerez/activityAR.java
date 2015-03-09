@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextPaint;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.metaio.cloud.plugin.util.MetaioCloudUtils;
 import com.metaio.sdk.ARELInterpreterAndroidJava;
@@ -48,7 +49,7 @@ public class activityAR extends ARViewActivity {
         //setContentView(R.layout.activity_ar);
 
         // Set GPS tracking configuration
-        boolean result = metaioSDK.setTrackingConfiguration("GPS");
+        boolean result = metaioSDK.setTrackingConfiguration("GPS", false);
         MetaioDebug.log("Tracking data loaded: " + result);
     }
 
@@ -132,15 +133,19 @@ public class activityAR extends ARViewActivity {
         // in the callback, in order to create an annotation image with the title on it.
         mLondonGeo = createPOIGeometry(london);
         mAnnotatedGeometriesGroup.addGeometry(mLondonGeo, "London");
+        mLondonGeo.setName("London");
 
         mParisGeo = createPOIGeometry(paris);
         mAnnotatedGeometriesGroup.addGeometry(mParisGeo, "Paris");
+        mParisGeo.setName("Paris");
 
         mRomeGeo = createPOIGeometry(rome);
         mAnnotatedGeometriesGroup.addGeometry(mRomeGeo, "Rome");
+        mRomeGeo.setName("Rome");
 
         mTokyoGeo = createPOIGeometry(tokyo);
         mAnnotatedGeometriesGroup.addGeometry(mTokyoGeo, "Tokyo");
+        mTokyoGeo.setName("Tokyo");
 
         File metaioManModel =
                 AssetsManager.getAssetPathAsFile(getApplicationContext(),
@@ -189,6 +194,7 @@ public class activityAR extends ARViewActivity {
     @Override
     protected void onGeometryTouched(final IGeometry geometry) {
         MetaioDebug.log("Geometry selected: " + geometry);
+        Toast.makeText(this, "Selected " + geometry.getName(), Toast.LENGTH_SHORT).show();
 
         mSurfaceView.queueEvent(new Runnable() {
             @Override
@@ -262,7 +268,7 @@ public class activityAR extends ARViewActivity {
             Bitmap thumbnail = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
             try {
                 texture =
-                        ARELInterpreterAndroidJava.getAnnotationImageForPOI(title, title, distance, "5", thumbnail,
+                        ARELInterpreterAndroidJava.getAnnotationImageForPOI(title, title, distance, null, thumbnail,
                                 null,
                                 metaioSDK.getRenderSize(), activityAR.this,
                                 mPaint, inOutCachedBitmaps, inOutCachedAnnotationBackgroundIndex, textureHash);
