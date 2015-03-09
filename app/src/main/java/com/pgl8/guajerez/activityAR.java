@@ -133,19 +133,15 @@ public class activityAR extends ARViewActivity {
         // in the callback, in order to create an annotation image with the title on it.
         mLondonGeo = createPOIGeometry(london);
         mAnnotatedGeometriesGroup.addGeometry(mLondonGeo, "London");
-        mLondonGeo.setName("London");
 
         mParisGeo = createPOIGeometry(paris);
         mAnnotatedGeometriesGroup.addGeometry(mParisGeo, "Paris");
-        mParisGeo.setName("Paris");
 
         mRomeGeo = createPOIGeometry(rome);
         mAnnotatedGeometriesGroup.addGeometry(mRomeGeo, "Rome");
-        mRomeGeo.setName("Rome");
 
         mTokyoGeo = createPOIGeometry(tokyo);
         mAnnotatedGeometriesGroup.addGeometry(mTokyoGeo, "Tokyo");
-        mTokyoGeo.setName("Tokyo");
 
         File metaioManModel =
                 AssetsManager.getAssetPathAsFile(getApplicationContext(),
