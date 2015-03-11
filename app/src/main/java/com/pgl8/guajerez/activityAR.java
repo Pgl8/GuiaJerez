@@ -301,7 +301,7 @@ public class activityAR extends ARViewActivity {
                 try {
                     // Use texture "hash" to ensure that SDK loads new texture if texture changed
                     resultGeometry = metaioSDK.createGeometryFromImage(textureHash[0], texture, true, false);
-                    resultGeometry.setName((String) userData.toString());
+                    resultGeometry.setName(userData.toString());
                     resultGeometry.setScale(1.1f);
                 } finally {
                     if (geometryLock != null) {
@@ -316,7 +316,7 @@ public class activityAR extends ARViewActivity {
         @Override
         public void onFocusStateChanged(IGeometry geometry, Object userData, EGEOMETRY_FOCUS_STATE oldState,
                                         EGEOMETRY_FOCUS_STATE newState) {
-            MetaioDebug.log("onFocusStateChanged for " + (String) userData + ", " + oldState + "->" + newState);
+            MetaioDebug.log("onFocusStateChanged for " + userData + ", " + oldState + "->" + newState);
         }
     }
 }
