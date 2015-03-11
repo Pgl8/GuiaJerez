@@ -68,6 +68,7 @@ public class activityAR extends ARViewActivity {
         super.onDestroy();
     }
 
+    // Se encarga de dibujar la geometría de los pois de forma adecuada
     @Override
     public void onDrawFrame() {
         if (metaioSDK != null && mSensors != null) {
@@ -84,7 +85,7 @@ public class activityAR extends ARViewActivity {
                 heading = (float) (-Math.atan2(v.getY(), v.getX()) - Math.PI / 2.0);
             }
 
-            IGeometry geos[] = new IGeometry[]{mLondonGeo, mParisGeo, mRomeGeo, mTokyoGeo};
+            IGeometry geos[] = new IGeometry[]{mLondonGeo,mMunichGeo, mParisGeo, mRomeGeo, mTokyoGeo};
             Rotation rot = new Rotation((float) (Math.PI / 2.0), 0.0f, -heading);
             for (IGeometry geo : geos) {
                 if (geo != null) {
@@ -133,17 +134,26 @@ public class activityAR extends ARViewActivity {
         // in the callback, in order to create an annotation image with the title on it.
         mLondonGeo = createPOIGeometry(london);
         mAnnotatedGeometriesGroup.addGeometry(mLondonGeo, "London");
+        mLondonGeo.setName("London");
 
         mParisGeo = createPOIGeometry(paris);
         mAnnotatedGeometriesGroup.addGeometry(mParisGeo, "Paris");
+        mParisGeo.setName("Paris");
 
         mRomeGeo = createPOIGeometry(rome);
         mAnnotatedGeometriesGroup.addGeometry(mRomeGeo, "Rome");
+        mRomeGeo.setName("Rome");
 
         mTokyoGeo = createPOIGeometry(tokyo);
         mAnnotatedGeometriesGroup.addGeometry(mTokyoGeo, "Tokyo");
+        mTokyoGeo.setName("Tokyo");
 
-        File metaioManModel =
+        mMunichGeo = createPOIGeometry(munich);
+        mAnnotatedGeometriesGroup.addGeometry(mMunichGeo, "Munich");
+        mMunichGeo.setName("Munich");
+
+
+        /*File metaioManModel =
                 AssetsManager.getAssetPathAsFile(getApplicationContext(),
                         "metaioman.md2");
         if (metaioManModel != null) {
@@ -155,7 +165,7 @@ public class activityAR extends ARViewActivity {
             } else {
                 MetaioDebug.log(Log.ERROR, "Error loading geometry: " + metaioManModel);
             }
-        }
+        }*/
 
         // create radar
         mRadar = metaioSDK.createRadar();
@@ -291,6 +301,8 @@ public class activityAR extends ARViewActivity {
                 try {
                     // Use texture "hash" to ensure that SDK loads new texture if texture changed
                     resultGeometry = metaioSDK.createGeometryFromImage(textureHash[0], texture, true, false);
+                    resultGeometry.setName((String) userData.toString());
+                    resultGeometry.setScale(1.1f);
                 } finally {
                     if (geometryLock != null) {
                         geometryLock.unlock();
