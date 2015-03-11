@@ -107,6 +107,8 @@ public class activityInfoVinos extends ActionBarActivity {
 
         protected void onPostExecute(Elements result) {
             if (result != null) {
+                //Inicializamos el objeto de la clase vino
+                Vino vino;
                 //Asignamos el título de la activity
                 setTitle(getTitulo());
                 //Localizamos e inicializamos los elementos de la UI
@@ -116,8 +118,19 @@ public class activityInfoVinos extends ActionBarActivity {
                 TextView txt4 = (TextView) findViewById(R.id.textView9);
 
                 //Creamos el objeto correspondiente con un poco de formateo del parser
-                Vino vino = new Vino(result.get(0).text(), result.get(1).text(), result.get(3).text(),
-                        Jsoup.parse(result.get(2).html().replaceAll("(?i)<br[^>]*>", "<pre>\n</pre>")).text());
+                if(getTitulo().equals("Amontillado")) {
+                    vino = new Vino(result.get(0).text() + " " + result.get(1).text(),
+                            result.get(2).text() + " " + result.get(3).text(),
+                            result.get(5).text(),
+                            Jsoup.parse(result.get(4).html().replaceAll("(?i)<br[^>]*>", "<pre>\n</pre>")).text());
+                }else if(getTitulo().equals("Oloroso")){
+                    vino = new Vino(result.get(0).text() + " " + result.get(1).text(),
+                            result.get(2).text(), result.get(4).text(),
+                            Jsoup.parse(result.get(3).html().replaceAll("(?i)<br[^>]*>", "<pre>\n</pre>")).text());
+                }else{
+                    vino = new Vino(result.get(0).text(), result.get(1).text(), result.get(3).text(),
+                            Jsoup.parse(result.get(2).html().replaceAll("(?i)<br[^>]*>", "<pre>\n</pre>")).text());
+                }
 
                 //Asignamos los elementos al objeto de la UI determinado
                 txt1.setText(vino.getNotasCata());
