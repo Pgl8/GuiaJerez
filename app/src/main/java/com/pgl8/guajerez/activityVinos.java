@@ -10,6 +10,7 @@ import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.SoundEffectConstants;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -47,11 +48,10 @@ public class activityVinos extends ActionBarActivity {
             @Override
             public void onClick(View view, int position) {
                 view.setSelected(true);
-                //view.setBackgroundColor(getResources().getColor(R.color.lightGray));
+                view.playSoundEffect(SoundEffectConstants.CLICK);
                 Intent intent = new Intent(getBaseContext(), activityInfoVinos.class);
                 intent.putExtra("posicion", position);
                 startActivity(intent);
-                //view.setBackgroundColor(getResources().getColor(R.color.white));
             }
 
             @Override
@@ -77,6 +77,21 @@ public class activityVinos extends ActionBarActivity {
             data.add(lista);
         }
         return data;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     @Override
