@@ -4,7 +4,9 @@
               android:layout_height="fill_parent"
               tools:context="com.pgl8.guajerez.activityVinos"
               android:background="#FFFFFF"
-              android:orientation="horizontal">
+              android:orientation="horizontal"
+              android:clickable="true"
+              android:focusable="true">
 
 
     <android.support.v7.widget.RecyclerView
@@ -13,6 +15,8 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF"
         android:clickable="true"
-        android:focusable="true"/>
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:longClickable="true"/>
 
 </LinearLayout>
