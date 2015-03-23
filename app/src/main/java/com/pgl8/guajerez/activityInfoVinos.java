@@ -107,7 +107,7 @@ public class activityInfoVinos extends ActionBarActivity {
                 new AlertDialog.Builder(getBaseContext())
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Error de conexión")
-                .setMessage("Ha sido imposible conectar con el servidor, compruebe su conexión.")
+                .setMessage("Ha sido imposible conectar con el servidor, inténtalo más tarde")
                 .setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
