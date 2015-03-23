@@ -104,7 +104,7 @@ public class activityInfoVinos extends ActionBarActivity {
                 e.printStackTrace();
                 Log.e(TAG, "Error al cargar contenido", e);
                 // se muestra un dialog de error de conexión
-                new AlertDialog.Builder(getBaseContext())
+                new AlertDialog.Builder(getApplicationContext())
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Error de conexión")
                 .setMessage("Ha sido imposible conectar con el servidor, inténtalo más tarde")

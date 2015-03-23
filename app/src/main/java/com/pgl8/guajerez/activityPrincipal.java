@@ -1,6 +1,11 @@
 package com.pgl8.guajerez;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -16,14 +21,7 @@ import java.io.IOException;
 
 
 public class activityPrincipal extends ActionBarActivity {
-    /**
-     * Task that will extract all the assets
-     */
     AssetsExtracter mTask;
-
-    /**
-     * Progress view
-     */
     View mProgress;
 
     @Override
@@ -31,15 +29,29 @@ public class activityPrincipal extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        // Habilita los mensajes de debug de metaio
-        MetaioDebug.enableLogging(BuildConfig.DEBUG);
+        if(!isNetworkAvailable()){
+            // se muestra un dialog de error de conexión
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Error de conexión")
+                    .setMessage("No dispone de conexión a Internet, compruebe su conexión")
+                    .setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    }).show();
+        }else {
+            // habilita los mensajes de debug de metaio
+            MetaioDebug.enableLogging(BuildConfig.DEBUG);
 
-        // Identificamos la barra de progreso
-        mProgress = findViewById(R.id.progress);
+            // identificamos la barra de progreso
+            mProgress = findViewById(R.id.progress);
 
-        // Extraemos los assets
-        mTask = new AssetsExtracter();
-        mTask.execute(0);
+            // extraemos los assets
+            mTask = new AssetsExtracter();
+            mTask.execute(0);
+        }
     }
 
     @Override
@@ -60,42 +72,41 @@ public class activityPrincipal extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_principal, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
-    //Inicia la actividad de vinos
+    // función para comprobar si existe conexión disponible
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    // inicia la actividad de vinos
     public void activityVinos(View view) {
         startActivity(new Intent(this, activityVinos.class));
     }
 
-    //Inicia la actividad de mapa
+    // inicia la actividad de mapa
     public void activityMapa(View view) {
         startActivity(new Intent(this, activityMapa.class));
     }
 
-    //Inicia la actividad de realidad aumentada
+    // inicia la actividad de realidad aumentada
     public void activityAR(View view) {
         startActivity(new Intent(this, activityAR.class));
     }
 
-    //Clase interna para la extracción de assets para metaio SDK
+    // clase interna para la extracción de assets para metaio SDK
     private class AssetsExtracter extends AsyncTask<Integer, Integer, Boolean> {
 
         @Override
