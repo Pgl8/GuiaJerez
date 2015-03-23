@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
 import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,10 +47,10 @@ public class activityVinos extends ActionBarActivity {
             // función que es llamada cuando se produce un click e inicializa la actividad pertinente
             @Override
             public void onClick(View view, int position) {
-                for(int j = 0; j < ((ViewGroup)view).getChildCount(); ++j){
+                /*for(int j = 0; j < ((ViewGroup)view).getChildCount(); ++j){
                     ((ViewGroup) view).getChildAt(j).setSelected(false);
                 }
-                ((ViewGroup) view).getChildAt(position).setSelected(true);
+                ((ViewGroup) view).getChildAt(position).setSelected(true);*/
                 view.playSoundEffect(SoundEffectConstants.CLICK);
                 Intent intent = new Intent(getBaseContext(), activityInfoVinos.class);
                 intent.putExtra("posicion", position);

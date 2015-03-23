@@ -1,5 +1,7 @@
 package com.pgl8.guajerez;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -83,22 +85,36 @@ public class activityInfoVinos extends ActionBarActivity {
 
         @Override
         protected Elements doInBackground(String... params) {
-            //Método de obtención con JSOUP
+            // variable que contendrá el resultado del parser
             Elements contenido;
-            try {
-                if (getTitulo().equals("Palo Cortado")) {
+            try{
+                if(getTitulo().equals("Palo Cortado")){
+                    // conexión con servidor
                     Document doc = Jsoup.connect("http://www.sherry.org/es/fichapaloc.cfm").get();
+                    // obtención del fragmento de texto que queremos
                     contenido = doc.select("div.blanco");
-                } else {
-                    Document doc = Jsoup.connect("http://www.sherry.org/es/ficha" + getTitulo().toLowerCase().replace(" ", "") + ".cfm").get();
+                }else{
+                    // conexión con servidor
+                    Document doc = Jsoup.connect("http://www.sherry.org/es/ficha" + getTitulo()
+                            .toLowerCase().replace(" ", "") + ".cfm").get();
+                    // obtención del fragmento de texto que queremos
                     contenido = doc.select("div.blanco");
                 }
-                //Log.v(TAG, "http://www.sherry.org/es/ficha" + titulo.toLowerCase().replace(" ", "") + ".cfm");
-
-            } catch (IOException e) {
-                //Añadir dialog conexión
+            }catch(IOException e){
                 e.printStackTrace();
                 Log.e(TAG, "Error al cargar contenido", e);
+                // se muestra un dialog de error de conexión
+                new AlertDialog.Builder(getBaseContext())
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Error de conexión")
+                .setMessage("Ha sido imposible conectar con el servidor, compruebe su conexión.")
+                .setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).show();
+
                 return null;
             }
 
