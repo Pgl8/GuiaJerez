@@ -96,6 +96,11 @@ public class activityPrincipal extends ActionBarActivity {
         startActivity(new Intent(this, activityVinos.class));
     }
 
+    // inicia la actividad de vinos
+    public void activityLugares(View view) {
+        startActivity(new Intent(this, activityLugares.class));
+    }
+
     // inicia la actividad de mapa
     public void activityMapa(View view) {
         startActivity(new Intent(this, activityMapa.class));

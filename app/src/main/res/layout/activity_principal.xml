@@ -36,20 +36,30 @@
         android:layout_height="wrap_content"
         android:text="Mapas"
         android:id="@+id/btn_bodegas"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/btn_vino"
-        android:layout_alignLeft="@+id/btn_vino"
-        android:layout_alignStart="@+id/btn_vino"
-        android:onClick="activityMapa"/>
+        android:layout_marginTop="28dp"
+        android:onClick="activityMapa"
+        android:layout_below="@+id/btn_lugares"
+        android:layout_centerHorizontal="true"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Vista 3D"
         android:id="@+id/button3"
+        android:layout_marginTop="24dp"
+        android:onClick="activityAR"
         android:layout_below="@+id/btn_bodegas"
+        android:layout_alignLeft="@+id/btn_bodegas"
+        android:layout_alignStart="@+id/btn_bodegas"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lugares"
+        android:id="@+id/btn_lugares"
+        android:layout_below="@+id/btn_vino"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:onClick="activityAR"/>
+        android:layout_marginTop="39dp"
+        android:onClick="activityLugares"/>
 
 </RelativeLayout>
