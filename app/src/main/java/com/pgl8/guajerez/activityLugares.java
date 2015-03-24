@@ -67,8 +67,12 @@ public class activityLugares extends ActionBarActivity {
         String[] titles = {"Williams & Humbert", "Fundador Pedro Domecq", "Gonzalez Byass",
                 "Emilio Hidalgo", "Romate", "Álvaro Domecq", "Garvey", "José Estevez",
                 "Tradición", "Diez Mérito", "Emilio Lustau", "Rey Fernando de Castilla"};
-        String[] texts = {};
-        String[] distances = {};
+        String[] texts = {"Ctra N- IV, Km 641", "C/ San Ildefonso, 3", "C/ Manuel Mª González, 12",
+                "C/ Clavel, 29 ", "C/ Lealas, 26", "Calle San Luis",
+                "Ctra. Circunvalación", "Ctra. N-IV, Km. 640", "C/ Cordobeses, 3",
+                "C/Diego Fernández de Herrera", "C/ Arcos, 53", "Calle San Francisco Javier, 3"};
+        String[] distances = {"1km", "1km", "1km", "1km", "1km", "1km", "1km", "1km", "1km", "1km",
+                              "1km", "1km"};
         for (int i = 0; i < titles.length && i < icons.length; i++) {
             CustomPlaceList lista = new CustomPlaceList();
             lista.iconId = icons[i];

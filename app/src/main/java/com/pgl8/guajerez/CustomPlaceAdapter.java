@@ -25,7 +25,7 @@ public class CustomPlaceAdapter extends RecyclerView.Adapter<CustomPlaceAdapter.
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int i) {
-        View view = inflater.inflate(R.layout.custom_row, parent, false);
+        View view = inflater.inflate(R.layout.customplacerow, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
@@ -41,10 +41,12 @@ public class CustomPlaceAdapter extends RecyclerView.Adapter<CustomPlaceAdapter.
         viewHolder.distancia.setText(current.distance);
     }
 
+    // función que devuelve el tamaño de la lista
     @Override
     public int getItemCount() {
-        return 0;
+        return data.size();
     }
+
 
     // clase interna que extiende el recycler view, necesaria para localizar los elementos de la UI
     class MyViewHolder extends RecyclerView.ViewHolder {
