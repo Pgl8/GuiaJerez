@@ -19,29 +19,25 @@ import java.util.List;
 
 public class activityLugares extends ActionBarActivity {
 
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private CustomAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lugares);
 
-        recyclerView = (RecyclerView) findViewById(R.id.lugaresList);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.lugaresList);
 
         // Opción para aumentar la eficiencia del mapa
         recyclerView.setHasFixedSize(true);
 
         // Obtenemos y asignamos el linear layout manager
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         // asignamos la decoración de los objetos del recycler view
         recyclerView.addItemDecoration(new DividerItemDecoration(this));
 
         // especificamos un adaptador y el listener del click
-        adapter = new CustomAdapter(this, getData());
+        CustomPlaceAdapter adapter = new CustomPlaceAdapter(this, getData());
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new activityLugares.ClickListener() {
             // función que es llamada cuando se produce un click e inicializa la actividad pertinente
@@ -62,8 +58,8 @@ public class activityLugares extends ActionBarActivity {
     }
 
     //Función que obtiene la lista de objetos para el recycler view
-    public static List<CustomList> getData() {
-        List<CustomList> data = new ArrayList<>();
+    public static List<CustomPlaceList> getData() {
+        List<CustomPlaceList> data = new ArrayList<>();
         int[] icons = {R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher,
                 R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher,
                 R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher,
@@ -71,10 +67,14 @@ public class activityLugares extends ActionBarActivity {
         String[] titles = {"Williams & Humbert", "Fundador Pedro Domecq", "Gonzalez Byass",
                 "Emilio Hidalgo", "Romate", "Álvaro Domecq", "Garvey", "José Estevez",
                 "Tradición", "Diez Mérito", "Emilio Lustau", "Rey Fernando de Castilla"};
+        String[] texts = {};
+        String[] distances = {};
         for (int i = 0; i < titles.length && i < icons.length; i++) {
-            CustomList lista = new CustomList();
+            CustomPlaceList lista = new CustomPlaceList();
             lista.iconId = icons[i];
             lista.title = titles[i];
+            lista.text = texts[i];
+            lista.distance = distances[i];
             data.add(lista);
         }
         return data;
