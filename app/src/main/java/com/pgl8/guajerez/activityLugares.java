@@ -44,6 +44,7 @@ public class activityLugares extends ActionBarActivity {
             @Override
             public void onClick(View view, int position) {
                 view.playSoundEffect(SoundEffectConstants.CLICK);
+                // CAMBIAR
                 Intent intent = new Intent(getBaseContext(), activityInfoVinos.class);
                 intent.putExtra("posicion", position);
                 startActivity(intent);
