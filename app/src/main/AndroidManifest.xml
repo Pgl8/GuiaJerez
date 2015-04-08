@@ -37,6 +37,7 @@
     <uses-feature
         android:name="android.hardware.sensor.gyroscope"
         android:required="true" />
+
     <!-- Declaración de actividades de la aplicación -->
     <application
         android:allowBackup="true"
@@ -101,6 +102,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pgl8.guajerez.activityPrincipal" />
+        </activity>
+        <activity
+            android:name=".activityInfoLugares"
+            android:label="@string/title_activity_activity_info_lugares"
+            android:parentActivityName=".activityLugares" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pgl8.guajerez.activityLugares" />
         </activity>
     </application>
 
