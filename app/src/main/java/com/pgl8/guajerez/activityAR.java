@@ -177,39 +177,51 @@ public class activityAR extends ARViewActivity {
         // in the callback, in order to create an annotation image with the title on it.
         mWillHum = createPOIGeometry(lWillhum);
         mAnnotatedGeometriesGroup.addGeometry(mWillHum, "Williams & Humbert");
+        mWillHum.setName("Williams & Humbert");
 
         mFundador = createPOIGeometry(lFundador);
         mAnnotatedGeometriesGroup.addGeometry(mFundador, "Fundador Álvaro Domecq");
+        mFundador.setName("Fundador");
 
         mGonByass = createPOIGeometry(lGonbyass);
         mAnnotatedGeometriesGroup.addGeometry(mGonByass, "Gonzalez Byass");
+        mGonByass.setName("Gonzalez Byass");
 
         mHidalgo = createPOIGeometry(lHidalgo);
         mAnnotatedGeometriesGroup.addGeometry(mHidalgo, "Emilio Hidalgo");
+        mHidalgo.setName("Hidalgo");
 
         mRomate = createPOIGeometry(lRomate);
         mAnnotatedGeometriesGroup.addGeometry(mRomate, "Romate");
+        mRomate.setName("Romate");
 
         mDomecq = createPOIGeometry(lDomecq);
         mAnnotatedGeometriesGroup.addGeometry(mDomecq, "Álvaro Domecq");
+        mDomecq.setName("Domecq");
 
         mGarvey = createPOIGeometry(lGarvey);
         mAnnotatedGeometriesGroup.addGeometry(mGarvey, "Garvey");
+        mGarvey.setName("Garvey");
 
         mEstevez = createPOIGeometry(lEstevez);
         mAnnotatedGeometriesGroup.addGeometry(mEstevez, "José Estevez");
+        mEstevez.setName("Estevez");
 
         mTradicion = createPOIGeometry(lTradicion);
         mAnnotatedGeometriesGroup.addGeometry(mTradicion, "Tradición");
+        mTradicion.setName("Tradicion");
 
         mMerito = createPOIGeometry(lMerito);
         mAnnotatedGeometriesGroup.addGeometry(mMerito, "Diez Mérito");
+        mMerito.setName("Merito");
 
         mLustau = createPOIGeometry(lLustau);
         mAnnotatedGeometriesGroup.addGeometry(mLustau, "Emilio Lustao");
+        mLustau.setName("Lustau");
 
         mReyFer = createPOIGeometry(lReyfer);
         mAnnotatedGeometriesGroup.addGeometry(mReyFer, "Rey Fernando de Castilla");
+        mReyFer.setName("Rey Fernando");
 
         /*mParisGeo = createPOIGeometry(paris);
         mAnnotatedGeometriesGroup.addGeometry(mParisGeo, "Paris");
