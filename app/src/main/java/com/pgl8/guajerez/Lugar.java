@@ -2,20 +2,20 @@ package com.pgl8.guajerez;
 
 
 public class Lugar {
-    private float mLatitud;
-    private float mLongitud;
+    private double mLatitud;
+    private double mLongitud;
 
     // constructor por defecto
-    public Lugar(float mLatitud, float mLongitud) {
+    public Lugar(double mLatitud, double mLongitud) {
         this.mLatitud = mLatitud;
         this.mLongitud = mLongitud;
     }
 
     // métodos observadores
-    public float getLatitud() {
+    public double getLatitud() {
         return mLatitud;
     }
-    public float getLongitud() {
+    public double getLongitud() {
         return mLongitud;
     }
 }

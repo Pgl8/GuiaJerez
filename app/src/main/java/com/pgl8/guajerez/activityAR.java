@@ -35,11 +35,24 @@ public class activityAR extends ARViewActivity {
     /**
      * Geometries
      */
-    private IGeometry mLondonGeo;
+    /*private IGeometry mLondonGeo;
     private IGeometry mMunichGeo;
     private IGeometry mRomeGeo;
     private IGeometry mTokyoGeo;
-    private IGeometry mParisGeo;
+    private IGeometry mParisGeo;*/
+
+    private IGeometry mWillHum;
+    private IGeometry mFundador;
+    private IGeometry mGonByass;
+    private IGeometry mHidalgo;
+    private IGeometry mRomate;
+    private IGeometry mDomecq;
+    private IGeometry mGarvey;
+    private IGeometry mEstevez;
+    private IGeometry mTradicion;
+    private IGeometry mMerito;
+    private IGeometry mLustau;
+    private IGeometry mReyFer;
 
     private IRadar mRadar;
 
@@ -85,7 +98,10 @@ public class activityAR extends ARViewActivity {
                 heading = (float) (-Math.atan2(v.getY(), v.getX()) - Math.PI / 2.0);
             }
 
-            IGeometry geos[] = new IGeometry[]{mLondonGeo,mMunichGeo, mParisGeo, mRomeGeo, mTokyoGeo};
+            //IGeometry geos[] = new IGeometry[]{mLondonGeo,mMunichGeo, mParisGeo, mRomeGeo, mTokyoGeo};
+            IGeometry geos[] = new IGeometry[]{mWillHum, mFundador, mGonByass, mHidalgo, mRomate,
+                                               mDomecq, mGarvey, mEstevez, mTradicion, mMerito,
+                                               mLustau, mReyFer};
             Rotation rot = new Rotation((float) (Math.PI / 2.0), 0.0f, -heading);
             for (IGeometry geo : geos) {
                 if (geo != null) {
@@ -121,37 +137,83 @@ public class activityAR extends ARViewActivity {
         // Set render frustum accordingly
         metaioSDK.setRendererClippingPlaneLimits(10, 220000);
 
+        // Creamos los objetos necesarios
+        Lugar willhum = new Lugar(36.6876057, -6.1229854);
+        Lugar fundador = new Lugar(36.68202, -6.1445999);
+        Lugar gonbyass = new Lugar(36.6816904, -6.1392172);
+        Lugar hidalgo = new Lugar(36.6860467, -6.1316447);
+        Lugar romate = new Lugar(36.6897409, -6.142153);
+        Lugar domecq = new Lugar(36.677513, -6.127222);
+        Lugar garvey = new Lugar(36.701129, -6.14296);
+        Lugar estevez = new Lugar(36.685982,-6.154461);
+        Lugar tradicion = new Lugar(36.685529, -6.145826);
+        Lugar merito = new Lugar(36.680445, -6.13109);
+        Lugar lustau = new Lugar(36.684118, -6.130857);
+        Lugar reyfer = new Lugar(36.689226, -6.143113);
+
         // let's create LLA objects for known cities
-        LLACoordinate munich = new LLACoordinate(48.142573, 11.550321, 0, 0);
+        /*LLACoordinate munich = new LLACoordinate(48.142573, 11.550321, 0, 0);
         LLACoordinate london = new LLACoordinate(51.50661, -0.130463, 0, 0);
         LLACoordinate tokyo = new LLACoordinate(35.657464, 139.773865, 0, 0);
         LLACoordinate rome = new LLACoordinate(41.90177, 12.45987, 0, 0);
-        LLACoordinate paris = new LLACoordinate(48.85658, 2.348671, 0, 0);
+        LLACoordinate paris = new LLACoordinate(48.85658, 2.348671, 0, 0);*/
+
+        LLACoordinate lWillhum = new LLACoordinate(willhum.getLatitud(), willhum.getLongitud(),0,0);
+        LLACoordinate lFundador = new LLACoordinate(fundador.getLatitud(), fundador.getLongitud(),0,0);
+        LLACoordinate lGonbyass = new LLACoordinate(gonbyass.getLatitud(), gonbyass.getLongitud(),0,0);
+        LLACoordinate lHidalgo = new LLACoordinate(hidalgo.getLatitud(), hidalgo.getLongitud(),0,0);
+        LLACoordinate lRomate = new LLACoordinate(romate.getLatitud(), romate.getLongitud(),0,0);
+        LLACoordinate lDomecq = new LLACoordinate(domecq.getLatitud(), domecq.getLongitud(),0,0);
+        LLACoordinate lGarvey = new LLACoordinate(garvey.getLatitud(), garvey.getLongitud(),0,0);
+        LLACoordinate lEstevez = new LLACoordinate(estevez.getLatitud(), estevez.getLongitud(),0,0);
+        LLACoordinate lTradicion = new LLACoordinate(tradicion.getLatitud(), tradicion.getLongitud(),0,0);
+        LLACoordinate lMerito = new LLACoordinate(merito.getLatitud(), merito.getLongitud(),0,0);
+        LLACoordinate lLustau = new LLACoordinate(lustau.getLatitud(), lustau.getLongitud(),0,0);
+        LLACoordinate lReyfer = new LLACoordinate(reyfer.getLatitud(), reyfer.getLongitud(),0,0);
 
         // Load some POIs. Each of them has the same shape at its geoposition. We pass a string
         // (const char*) to IAnnotatedGeometriesGroup::addGeometry so that we can use it as POI
         // title
         // in the callback, in order to create an annotation image with the title on it.
-        mLondonGeo = createPOIGeometry(london);
-        mAnnotatedGeometriesGroup.addGeometry(mLondonGeo, "London");
-        mLondonGeo.setName("London");
+        mWillHum = createPOIGeometry(lWillhum);
+        mAnnotatedGeometriesGroup.addGeometry(mWillHum, "Williams & Humbert");
 
-        mParisGeo = createPOIGeometry(paris);
+        mFundador = createPOIGeometry(lFundador);
+        mAnnotatedGeometriesGroup.addGeometry(mFundador, "Fundador Álvaro Domecq");
+
+        mGonByass = createPOIGeometry(lGonbyass);
+        mAnnotatedGeometriesGroup.addGeometry(mGonByass, "Gonzalez Byass");
+
+        mHidalgo = createPOIGeometry(lHidalgo);
+        mAnnotatedGeometriesGroup.addGeometry(mHidalgo, "Emilio Hidalgo");
+
+        mRomate = createPOIGeometry(lRomate);
+        mAnnotatedGeometriesGroup.addGeometry(mRomate, "Romate");
+
+        mDomecq = createPOIGeometry(lDomecq);
+        mAnnotatedGeometriesGroup.addGeometry(mDomecq, "Álvaro Domecq");
+
+        mGarvey = createPOIGeometry(lGarvey);
+        mAnnotatedGeometriesGroup.addGeometry(mGarvey, "Garvey");
+
+        mEstevez = createPOIGeometry(lEstevez);
+        mAnnotatedGeometriesGroup.addGeometry(mEstevez, "José Estevez");
+
+        mTradicion = createPOIGeometry(lTradicion);
+        mAnnotatedGeometriesGroup.addGeometry(mTradicion, "Tradición");
+
+        mMerito = createPOIGeometry(lMerito);
+        mAnnotatedGeometriesGroup.addGeometry(mMerito, "Diez Mérito");
+
+        mLustau = createPOIGeometry(lLustau);
+        mAnnotatedGeometriesGroup.addGeometry(mLustau, "Emilio Lustao");
+
+        mReyFer = createPOIGeometry(lReyfer);
+        mAnnotatedGeometriesGroup.addGeometry(mReyFer, "Rey Fernando de Castilla");
+
+        /*mParisGeo = createPOIGeometry(paris);
         mAnnotatedGeometriesGroup.addGeometry(mParisGeo, "Paris");
-        mParisGeo.setName("Paris");
-
-        mRomeGeo = createPOIGeometry(rome);
-        mAnnotatedGeometriesGroup.addGeometry(mRomeGeo, "Rome");
-        mRomeGeo.setName("Rome");
-
-        mTokyoGeo = createPOIGeometry(tokyo);
-        mAnnotatedGeometriesGroup.addGeometry(mTokyoGeo, "Tokyo");
-        mTokyoGeo.setName("Tokyo");
-
-        mMunichGeo = createPOIGeometry(munich);
-        mAnnotatedGeometriesGroup.addGeometry(mMunichGeo, "Munich");
-        mMunichGeo.setName("Munich");
-
+        mParisGeo.setName("Paris");*/
 
         /*File metaioManModel =
                 AssetsManager.getAssetPathAsFile(getApplicationContext(),
@@ -176,11 +238,18 @@ public class activityAR extends ARViewActivity {
         mRadar.setRelativeToScreen(IGeometry.ANCHOR_TL);
 
         // add geometries to the radar
-        mRadar.add(mLondonGeo);
-        mRadar.add(mMunichGeo);
-        mRadar.add(mTokyoGeo);
-        mRadar.add(mParisGeo);
-        mRadar.add(mRomeGeo);
+        mRadar.add(mWillHum);
+        mRadar.add(mFundador);
+        mRadar.add(mGonByass);
+        mRadar.add(mHidalgo);
+        mRadar.add(mRomate);
+        mRadar.add(mDomecq);
+        mRadar.add(mGarvey);
+        mRadar.add(mEstevez);
+        mRadar.add(mTradicion);
+        mRadar.add(mMerito);
+        mRadar.add(mLustau);
+        mRadar.add(mReyFer);
     }
 
     private IGeometry createPOIGeometry(LLACoordinate lla) {

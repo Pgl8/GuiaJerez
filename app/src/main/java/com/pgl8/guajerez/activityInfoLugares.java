@@ -128,7 +128,7 @@ public class activityInfoLugares extends ActionBarActivity {
                 setTitle(getTitulo());
                 //Localizamos e inicializamos los elementos de la UI
                 TextView txt1 = (TextView) findViewById(R.id.textView3);
-                TextView txt2 = (TextView) findViewById(R.id.textView5);
+                TextView txt2 = (TextView) findViewById(R.id.tvWeb);
                 TextView txt3 = (TextView) findViewById(R.id.textView7);
                 TextView txt4 = (TextView) findViewById(R.id.textView9);
 
