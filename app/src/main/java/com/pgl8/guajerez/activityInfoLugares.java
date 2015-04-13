@@ -2,6 +2,9 @@ package com.pgl8.guajerez;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -18,17 +22,36 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class activityInfoLugares extends ActionBarActivity {
+    private GridView gridView;
+    private GridViewAdapter gridAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_vinos);
+
+        gridView = (GridView) findViewById(R.id.gridView);
+        gridAdapter = new GridViewAdapter(this, R.layout.grid_row, getData());
+        gridView.setAdapter(gridAdapter);
+
         setTitle("");
         Bundle bundle = getIntent().getExtras();
         new obtenerHTML(bundle.getInt("posicion")).execute();
+    }
+
+    // Función que prepara las imágenes para el adaptador
+    private ArrayList<Imagen> getData() {
+        final ArrayList<Imagen> imageItems = new ArrayList<>();
+        TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
+        for (int i = 0; i < imgs.length(); i++) {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
+            imageItems.add(new Imagen(bitmap, "Image#" + i));
+        }
+        return imageItems;
     }
 
     @Override

@@ -51,7 +51,7 @@
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="0dp"
+                android:layout_marginLeft="16dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="0dp"/>
 
@@ -65,7 +65,8 @@
                 android:fontFamily="sans-serif"
                 android:layout_below="@+id/textView1"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="24dp"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -186,6 +187,13 @@
                 android:paddingTop="20dp"
                 android:paddingLeft="9dp"
                 />
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tvVis2"
+                android:id="@+id/gridView">
+            </GridLayout>
 
         </RelativeLayout>
     </ScrollView>
