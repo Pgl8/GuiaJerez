@@ -44,9 +44,12 @@ public class activityInfoLugares extends ActionBarActivity {
     }
 
     // Funci�n que prepara las im�genes para el adaptador
+    /**
+     *REVISAR
+     */
     private ArrayList<Imagen> getData() {
         final ArrayList<Imagen> imageItems = new ArrayList<>();
-        //TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
+        TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
         for (int i = 0; i < imgs.length(); i++) {
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
             imageItems.add(new Imagen(bitmap, "Image#" + i));
