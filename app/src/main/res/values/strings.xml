@@ -10,5 +10,6 @@
     <string name="title_activity_activity_ar">activityAR</string>
     <string name="title_activity_activity_lugares">Lugares</string>
     <string name="title_activity_activity_info_lugares">activityInfoLugares</string>
+    <string name="title_activity_activity_info_imagen">Imagen</string>
 
 </resources>

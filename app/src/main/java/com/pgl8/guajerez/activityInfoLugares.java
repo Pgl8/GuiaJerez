@@ -43,10 +43,10 @@ public class activityInfoLugares extends ActionBarActivity {
         new obtenerHTML(bundle.getInt("posicion")).execute();
     }
 
-    // Función que prepara las imágenes para el adaptador
+    // Funciï¿½n que prepara las imï¿½genes para el adaptador
     private ArrayList<Imagen> getData() {
         final ArrayList<Imagen> imageItems = new ArrayList<>();
-        TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
+        //TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
         for (int i = 0; i < imgs.length(); i++) {
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
             imageItems.add(new Imagen(bitmap, "Image#" + i));
@@ -76,7 +76,7 @@ public class activityInfoLugares extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //Necesita ser una tarea asíncrona
+    //Necesita ser una tarea asï¿½ncrona
     //Haremos una clase interna para ello
     class obtenerHTML extends AsyncTask<String, Void, Elements> {
         private static final String TAG = "Principal";
@@ -107,29 +107,29 @@ public class activityInfoLugares extends ActionBarActivity {
 
         @Override
         protected Elements doInBackground(String... params) {
-            // variable que contendrá el resultado del parser
+            // variable que contendrï¿½ el resultado del parser
             Elements contenido;
             try{
                 if(getTitulo().equals("Palo Cortado")){
-                    // conexión con servidor
+                    // conexiï¿½n con servidor
                     Document doc = Jsoup.connect("http://www.sherry.org/es/fichapaloc.cfm").get();
-                    // obtención del fragmento de texto que queremos
+                    // obtenciï¿½n del fragmento de texto que queremos
                     contenido = doc.select("div.blanco");
                 }else{
-                    // conexión con servidor
+                    // conexiï¿½n con servidor
                     Document doc = Jsoup.connect("http://www.sherry.org/es/ficha" + getTitulo()
                             .toLowerCase().replace(" ", "") + ".cfm").get();
-                    // obtención del fragmento de texto que queremos
+                    // obtenciï¿½n del fragmento de texto que queremos
                     contenido = doc.select("div.blanco");
                 }
             }catch(IOException e){
                 e.printStackTrace();
                 Log.e(TAG, "Error al cargar contenido", e);
-                // se muestra un dialog de error de conexión
+                // se muestra un dialog de error de conexiï¿½n
                 new AlertDialog.Builder(getApplicationContext())
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Error de conexión")
-                        .setMessage("Ha sido imposible conectar con el servidor, inténtalo más tarde")
+                        .setTitle("Error de conexiï¿½n")
+                        .setMessage("Ha sido imposible conectar con el servidor, intï¿½ntalo mï¿½s tarde")
                         .setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -147,7 +147,7 @@ public class activityInfoLugares extends ActionBarActivity {
             if (result != null) {
                 //Inicializamos el objeto de la clase vino
                 Vino vino;
-                //Asignamos el título de la activity
+                //Asignamos el tï¿½tulo de la activity
                 setTitle(getTitulo());
                 //Localizamos e inicializamos los elementos de la UI
                 TextView txt1 = (TextView) findViewById(R.id.textView3);
