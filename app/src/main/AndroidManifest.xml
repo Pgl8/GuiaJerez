@@ -111,6 +111,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pgl8.guajerez.activityLugares" />
         </activity>
+        <activity
+            android:name=".activityInfoImagen"
+            android:label="@string/title_activity_activity_info_imagen"
+            android:parentActivityName=".activityInfoLugares" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pgl8.guajerez.activityInfoLugares" />
+        </activity>
     </application>
 
 </manifest>
