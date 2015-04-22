@@ -131,7 +131,7 @@ public class activityInfoLugares extends ActionBarActivity {
                 // se muestra un dialog de error de conexiï¿½n
                 new AlertDialog.Builder(getApplicationContext())
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Error de conexiï¿½n")
+                        .setTitle("Error de conexión")
                         .setMessage("Ha sido imposible conectar con el servidor, intï¿½ntalo mï¿½s tarde")
                         .setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
                             @Override
