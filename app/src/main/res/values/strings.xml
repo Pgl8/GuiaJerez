@@ -11,5 +11,6 @@
     <string name="title_activity_activity_lugares">Lugares</string>
     <string name="title_activity_activity_info_lugares">activityInfoLugares</string>
     <string name="title_activity_activity_info_imagen">Imagen</string>
+    <string name="title_activity_activity_arlector">activityARLector</string>
 
 </resources>

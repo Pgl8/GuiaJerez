@@ -128,11 +128,11 @@ public class activityInfoLugares extends ActionBarActivity {
             }catch(IOException e){
                 e.printStackTrace();
                 Log.e(TAG, "Error al cargar contenido", e);
-                // se muestra un dialog de error de conexiï¿½n
+                // se muestra un dialog de error de conexion
                 new AlertDialog.Builder(getApplicationContext())
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Error de conexión")
-                        .setMessage("Ha sido imposible conectar con el servidor, intï¿½ntalo mï¿½s tarde")
+                        .setTitle("Error de conexion")
+                        .setMessage("Ha sido imposible conectar con el servidor, intentalo mas tarde")
                         .setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
