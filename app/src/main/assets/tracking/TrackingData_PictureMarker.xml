@@ -84,43 +84,15 @@
                     To guarantee a correct detection the image needs to have a 
                     clear rectangular contour, which can be distinguished from 
                     the background. -->
+
+
             <SensorCOS>
-			
-				<!--    ID string for uniquely identifying the marker. This ID 
-                        string must not be assigned to another marker. -->
-                <SensorCosID>Marker1</SensorCosID>
+                <SensorCosID>Marker3</SensorCosID>
                 <Parameters>
-                    <!--    Size of the marker which has to be provided to 
-                            correctly relate the marker pixel size to world 
-                            coordinates. The size is specified in millimeters. 
-                            -->
+
                     <Size>300</Size>
-
-                    <!--    Description of the marker properties. -->
                     <MarkerParameters>
-
-                        <!--    Reference image to identify the marker. The
-                                definition is very similar to the picture 
-                                marker configuration, except with two optional 
-                                attributes: "WidthMM" and "HeightMM". These 
-                                attributes specify the scale of the image in 
-                                millimeters in order to correctly relate pixel
-                                dimensions to real world dimensions. Per 
-                                default, the image resolution will be taken as 
-                                their values. It is advised to set these 
-                                attributes to augment the image independently 
-                                of the reference image resolution. -->
-                        <referenceImage qualityThreshold="0.70">glue_picture_marker_2.png</referenceImage>
-                    </MarkerParameters>
-                </Parameters>
-            </SensorCOS>
-            
-            <SensorCOS>
-                <SensorCosID>Marker2</SensorCosID>
-                <Parameters>
-				    <Size>300</Size>
-                    <MarkerParameters>
-                        <referenceImage qualityThreshold="0.70">glue_picture_marker_5.png</referenceImage>
+                        <referenceImage qualityThreshold="0.85">canasta.png</referenceImage>
                     </MarkerParameters>
                 </Parameters>
             </SensorCOS>

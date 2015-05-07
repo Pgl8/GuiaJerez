@@ -111,6 +111,11 @@ public class activityPrincipal extends ActionBarActivity {
         startActivity(new Intent(this, activityAR.class));
     }
 
+    // inicia la actividad de realidad aumentada
+    public void activityARLector(View view) {
+        startActivity(new Intent(this, activityARLector.class));
+    }
+
     // clase interna para la extracción de assets para metaio SDK
     private class AssetsExtracter extends AsyncTask<Integer, Integer, Boolean> {
 

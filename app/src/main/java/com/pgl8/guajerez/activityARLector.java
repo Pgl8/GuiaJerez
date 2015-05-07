@@ -1,5 +1,6 @@
 package com.pgl8.guajerez;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,8 @@ import com.metaio.sdk.ARViewActivity;
 import com.metaio.sdk.MetaioDebug;
 import com.metaio.sdk.jni.IGeometry;
 import com.metaio.sdk.jni.IMetaioSDKCallback;
+import com.metaio.sdk.jni.TrackingValues;
+import com.metaio.sdk.jni.TrackingValuesVector;
 import com.metaio.tools.io.AssetsManager;
 
 import java.io.File;
@@ -110,39 +113,48 @@ public class activityARLector extends ARViewActivity {
         return super.onOptionsItemSelected(item);
     }*/
 
-    final class MetaioSDKCallbackHandler extends IMetaioSDKCallback
-    {
+    final class MetaioSDKCallbackHandler extends IMetaioSDKCallback{
 
         @Override
-        public void onSDKReady()
-        {
+        public void onSDKReady() {
             // show GUI
-            runOnUiThread(new Runnable()
-            {
+            runOnUiThread(new Runnable() {
                 @Override
-                public void run()
-                {
+                public void run() {
                     mGUIView.setVisibility(View.VISIBLE);
                 }
             });
         }
 
-        /*@Override
-        public void onTrackingEvent(TrackingValuesVector trackingValues){
-            // if we detect any target, we bind the loaded geometry to this target
-            if(mMetaioMan != null)
-            {
-                for (int i=0; i<trackingValues.size(); i++)
-                {
-                    final TrackingValues tv = trackingValues.get(i);
-                    if (tv.isTrackingState())
-                    {
-                        mMetaioMan.setCoordinateSystemID(tv.getCoordinateSystemID());
-                        break;
+        @Override
+        public void onTrackingEvent(TrackingValuesVector trackingValues)
+        {
+            super.onTrackingEvent(trackingValues);
+            for(int i=0; i<trackingValues.size(); i++){
+                final TrackingValues v = trackingValues.get(i);
+                if (v.isTrackingState()){
+                    MetaioDebug.log("I AM TRACKING");
+                    final String raw_data = v.getAdditionalValues();
+                    MetaioDebug.log("I HAVE ADDITIONAL VALUES");
+                    if(raw_data != null) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MetaioDebug.log("Marker Scanned");
+                                final int position = 7;
+                                try {
+                                    Intent intent = new Intent(getBaseContext(), activityInfoVinos.class);
+                                    intent.putExtra("posicion", position);
+                                    startActivity(intent);
+                                }catch (final Exception ex){
+                                    MetaioDebug.log("Exception in runnable action");
+                                }
+                            }
+                        });
                     }
                 }
             }
+        }
 
-        }*/
     }
 }
