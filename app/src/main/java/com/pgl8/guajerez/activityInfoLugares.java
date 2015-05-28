@@ -150,7 +150,7 @@ public class activityInfoLugares extends ActionBarActivity {
             if (result != null) {
                 //Inicializamos el objeto de la clase vino
                 Vino vino;
-                //Asignamos el t�tulo de la activity
+                //Asignamos el titulo de la activity
                 setTitle(getTitulo());
                 //Localizamos e inicializamos los elementos de la UI
                 TextView txt1 = (TextView) findViewById(R.id.textView3);

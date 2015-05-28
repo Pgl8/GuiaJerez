@@ -62,7 +62,7 @@ public class activityAR extends ARViewActivity {
         //setContentView(R.layout.activity_ar);
 
         // Set GPS tracking configuration
-        boolean result = metaioSDK.setTrackingConfiguration("GPS", false);
+        boolean result = metaioSDK.setTrackingConfiguration("GPS");
         MetaioDebug.log("Tracking data loaded: " + result);
     }
 
