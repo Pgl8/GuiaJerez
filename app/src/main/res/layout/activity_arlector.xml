@@ -3,5 +3,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context="com.pgl8.guajerez.activityARLector">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Información"
+        android:id="@+id/button1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="68dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="171dp"
+        android:typeface="sans"
+        android:alpha="0.50"
+        android:visibility="invisible"/>
 </RelativeLayout>
 

@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 
 import com.metaio.sdk.ARViewActivity;
 import com.metaio.sdk.MetaioDebug;
@@ -18,6 +21,7 @@ import java.io.File;
 
 public class activityARLector extends ARViewActivity {
 
+    private Button button1;
     /**
      * Currently loaded tracking configuration file
      */
@@ -137,10 +141,20 @@ public class activityARLector extends ARViewActivity {
                     final String raw_data = v.getAdditionalValues();
                     MetaioDebug.log("I HAVE ADDITIONAL VALUES");
                     if(raw_data != null) {
-                        runOnUiThread(new Runnable() {
+                        MetaioDebug.log("Marker Scanned");
+                        //button1 = (Button) findViewById(R.id.button1);
+                        //button1.setVisibility(View.VISIBLE);
+                        //button1.setClickable(true);
+                        //Animation shake = AnimationUtils.loadAnimation(getBaseContext(), R.anim.cycle);
+                        //button1.startAnimation(shake);
+                        /*runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 MetaioDebug.log("Marker Scanned");
+                                button1.setVisibility(View.VISIBLE);
+                                button1.setClickable(true);
+                                Animation shake = AnimationUtils.loadAnimation(getBaseContext(), R.anim.cycle);
+                                button1.startAnimation(shake);
                                 final int position = 7;
                                 try {
                                     Intent intent = new Intent(getBaseContext(), activityInfoVinos.class);
@@ -150,7 +164,7 @@ public class activityARLector extends ARViewActivity {
                                     MetaioDebug.log("Exception in runnable action");
                                 }
                             }
-                        });
+                        });*/
                     }
                 }
             }

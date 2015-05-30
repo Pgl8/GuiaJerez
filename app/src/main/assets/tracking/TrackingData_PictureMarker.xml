@@ -92,7 +92,7 @@
 
                     <Size>300</Size>
                     <MarkerParameters>
-                        <referenceImage qualityThreshold="0.85">canasta.png</referenceImage>
+                        <referenceImage qualityThreshold="0.80">canasta.png</referenceImage>
                     </MarkerParameters>
                 </Parameters>
             </SensorCOS>
