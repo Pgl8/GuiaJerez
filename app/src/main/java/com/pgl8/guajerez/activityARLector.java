@@ -61,7 +61,8 @@ public class activityARLector extends ARViewActivity {
     protected void loadContents(){
         try{
             // Load the desired tracking configuration
-            trackingConfigFile = AssetsManager.getAssetPathAsFile(getApplicationContext(), "tracking/TrackingData_PictureMarker.xml");
+            trackingConfigFile = AssetsManager.getAssetPathAsFile(getApplicationContext(),
+                    "tracking/TrackingData_MarkerlessFast.xml");
             MetaioDebug.log("Tracking Config path = "+trackingConfigFile);
 
             boolean result = metaioSDK.setTrackingConfiguration(trackingConfigFile);
