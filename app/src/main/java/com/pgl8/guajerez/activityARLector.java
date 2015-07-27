@@ -1,17 +1,12 @@
 package com.pgl8.guajerez;
 
-import android.content.Intent;
-import android.hardware.camera2.CameraDevice;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import com.metaio.sdk.ARViewActivity;
 import com.metaio.sdk.MetaioDebug;
-import com.metaio.sdk.jni.Camera;
 import com.metaio.sdk.jni.IGeometry;
 import com.metaio.sdk.jni.IMetaioSDKAndroid;
 import com.metaio.sdk.jni.IMetaioSDKCallback;
@@ -20,7 +15,6 @@ import com.metaio.sdk.jni.TrackingValuesVector;
 import com.metaio.tools.io.AssetsManager;
 
 import java.io.File;
-import java.security.Policy;
 
 
 public class activityARLector extends ARViewActivity {
