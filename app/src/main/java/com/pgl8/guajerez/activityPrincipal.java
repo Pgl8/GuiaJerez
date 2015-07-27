@@ -8,7 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +20,7 @@ import com.metaio.tools.io.AssetsManager;
 import java.io.IOException;
 
 
-public class activityPrincipal extends ActionBarActivity {
+public class activityPrincipal extends AppCompatActivity {
     AssetsExtracter mTask;
     View mProgress;
 

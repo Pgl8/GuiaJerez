@@ -7,6 +7,5 @@
     <item name="routeButton" type="id"/>
     <item name="callButton" type="id"/>
     <item name="emailButton" type="id"/>
-    <item name="metaioSDKSignature" type="string">C+ZCyqSxuowblkdsw+iqoWljvHK9UmGXXoHfeDaIoUo=
-    </item>
+    <item name="metaioSDKSignature" type="string"/>
 </resources>

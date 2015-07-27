@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/layoutRotated"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_gravity="center_horizontal"
-              android:orientation="vertical"
-              android:padding="16dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutRotated"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp" >
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="8dp" >
 
         <!-- Thumbnail Image -->
 
@@ -25,7 +25,7 @@
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/icon_placeholder"
-            tools:ignore="MissingRegistered"/>
+            tools:ignore="MissingRegistered" />
 
         <com.metaio.cloud.plugin.view.RemoteImageView
             android:id="@+id/imageAttribution"
@@ -36,7 +36,7 @@
             android:layout_toRightOf="@id/imagePOIThumbnail"
             android:background="@null"
             android:scaleType="fitCenter"
-            tools:ignore="MissingRegistered"/>
+            tools:ignore="MissingRegistered" />
 
         <com.metaio.cloud.plugin.view.ScalableTextView
             android:id="@+id/textPOIName"
@@ -50,7 +50,7 @@
             android:lines="2"
             android:maxLines="2"
             android:textAppearance="@android:style/TextAppearance.Medium"
-            tools:ignore="MissingRegistered"/>
+            tools:ignore="MissingRegistered" />
 
         <RatingBar
             android:id="@+id/ratingbar"
@@ -62,7 +62,7 @@
             android:max="5"
             android:minHeight="25dip"
             android:numStars="5"
-            android:progressDrawable="@drawable/rating_drawable"/>
+            android:progressDrawable="@drawable/rating_drawable" />
 
         <TextView
             android:id="@+id/textPOILocation"
@@ -73,14 +73,14 @@
             android:layout_toRightOf="@id/imagePOIThumbnail"
             android:gravity="center_vertical"
             android:hint="0 Km."
-            android:singleLine="true"/>
+            android:singleLine="true" />
     </RelativeLayout>
     <!-- POI description -->
 
     <LinearLayout
         android:id="@+id/collapsible"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/textPOIDescription"
@@ -90,7 +90,7 @@
             android:layout_marginRight="8dp"
             android:ellipsize="end"
             android:gravity="start"
-            android:textAppearance="@android:style/TextAppearance.Small"/>
+            android:textAppearance="@android:style/TextAppearance.Small" />
     </LinearLayout>
     <!-- Action Buttons -->
 
@@ -98,7 +98,7 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="4dp">
+        android:padding="4dp" >
     </ListView>
 
 </LinearLayout>

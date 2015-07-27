@@ -10,21 +10,24 @@ import com.metaio.R;
 public class POIDetailDialog extends FragmentActivity
 
 {
-    POIDetailFragment mFragment;
+	POIDetailFragment mFragment;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.poiactivity);
-        mFragment = (POIDetailFragment) getSupportFragmentManager().findFragmentById(R.id.poidetailfragment);
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.poiactivity);
+		mFragment = (POIDetailFragment)getSupportFragmentManager().findFragmentById(R.id.poidetailfragment);
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            setResult(RESULT_CANCELED);
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		if (item.getItemId() == android.R.id.home)
+		{
+			setResult(RESULT_CANCELED);
+			finish();
+		}
+		return super.onOptionsItemSelected(item);
+	}
 }

@@ -1,6 +1,7 @@
 package com.pgl8.guajerez;
 
 import android.content.Intent;
+import android.hardware.camera2.CameraDevice;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,13 +11,16 @@ import android.widget.Button;
 
 import com.metaio.sdk.ARViewActivity;
 import com.metaio.sdk.MetaioDebug;
+import com.metaio.sdk.jni.Camera;
 import com.metaio.sdk.jni.IGeometry;
+import com.metaio.sdk.jni.IMetaioSDKAndroid;
 import com.metaio.sdk.jni.IMetaioSDKCallback;
 import com.metaio.sdk.jni.TrackingValues;
 import com.metaio.sdk.jni.TrackingValuesVector;
 import com.metaio.tools.io.AssetsManager;
 
 import java.io.File;
+import java.security.Policy;
 
 
 public class activityARLector extends ARViewActivity {
@@ -96,6 +100,15 @@ public class activityARLector extends ARViewActivity {
 
     }
 
+    @Override
+    public void onSurfaceChanged(int width, int height) {
+        //super.onSurfaceChanged(width, height);
+        android.hardware.Camera camera = IMetaioSDKAndroid.getCamera(this);
+        android.hardware.Camera.Parameters param = camera.getParameters();
+        param.setFocusMode(android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+        camera.setParameters(param);
+    }
+
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -143,6 +156,7 @@ public class activityARLector extends ARViewActivity {
                     MetaioDebug.log("I HAVE ADDITIONAL VALUES");
                     if(raw_data != null) {
                         MetaioDebug.log("Marker Scanned");
+                        MetaioDebug.log("Marker ID: "+ v.getCosName());
                         //button1 = (Button) findViewById(R.id.button1);
                         //button1.setVisibility(View.VISIBLE);
                         //button1.setClickable(true);

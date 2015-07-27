@@ -158,6 +158,11 @@ public class activityVinos extends ActionBarActivity {
 
         @Override
         public void onTouchEvent(RecyclerView rv, MotionEvent e) { }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+        }
     }
 
     //Interfaz destinada a ejecutar los eventos de click simple y click largo
