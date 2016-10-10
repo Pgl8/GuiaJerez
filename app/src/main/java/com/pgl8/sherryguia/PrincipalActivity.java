@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -28,6 +29,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     private GoogleApiClient mGoogleApiClient;
     private static final String TAG = "PrincipalActivity";
     private static final int RC_SIGN_IN = 9001;
+    private ProgressDialog mProgressDialog;
+    private TextView mStatusTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         setContentView(R.layout.activity_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mStatusTextView = (TextView) findViewById(R.id.status);
 
         // Button listeners
         findViewById(R.id.sign_in_button);
@@ -62,6 +67,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
                 //startActivity(new Intent(this, ));
             }
         });
+
+        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
 
     }
 
@@ -91,7 +98,21 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         }
     }
 
+    // [START onActivityResult]
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+    }
+// [END onActivityResult]
+
     private void showProgressDialog() {
+        Log.d(TAG, "Inside showProgressDialog()");
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setMessage(getString(R.string.loading));
@@ -102,8 +123,9 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     }
 
     private void hideProgressDialog() {
+        Log.d(TAG, "Inside hideProgressDialog()");
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.hide();
+            mProgressDialog.dismiss();
         }
     }
 
@@ -122,10 +144,13 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     }
 
     private void updateUI(boolean signedIn) {
+        Log.d(TAG, "Inside updateUI()");
         if (signedIn) {
+            Log.d(TAG, "Inside updateUI() signedIn");
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
         } else {
+            Log.d(TAG, "Inside updateUI() not signedIn");
             mStatusTextView.setText(R.string.signed_out);
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
@@ -157,8 +182,11 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
 
     @Override
     public void onClick(View v) {
+        Log.d(TAG, "Inside onClick()");
+        Log.d(TAG, "View: " + v.toString());
         switch (v.getId()) {
             case R.id.sign_in_button:
+                Log.d(TAG, "Inside onClick() sign in button");
                 signIn();
                 break;
             case R.id.sign_out_button:
@@ -172,6 +200,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
 
     // [START signIn]
     private void signIn() {
+        Log.d(TAG, "Inside signIn()");
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -179,6 +208,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
 
     // [START signOut]
     private void signOut() {
+        Log.d(TAG, "Inside signOut()");
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
                     @Override
@@ -190,6 +220,21 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
                 });
     }
     // [END signOut]
+
+    // [START revokeAccess]
+    private void revokeAccess() {
+        Log.d(TAG, "Inside revokeAccess()");
+        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        // [START_EXCLUDE]
+                        updateUI(false);
+                        // [END_EXCLUDE]
+                    }
+                });
+    }
+// [END revokeAccess]
 
 
     @Override
