@@ -42,7 +42,11 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         mStatusTextView = (TextView) findViewById(R.id.status);
 
         // Button listeners
-        findViewById(R.id.sign_in_button);
+        //findViewById(R.id.sign_in_button);
+        this.findViewById(R.id.sign_in_button).setOnClickListener(this);
+        this.findViewById(R.id.sign_out_button).setOnClickListener(this);
+        this.findViewById(R.id.sign_out_and_disconnect).setOnClickListener(this);
+
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -68,7 +72,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             }
         });
 
-        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        //SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
 
     }
 
@@ -234,7 +238,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
                     }
                 });
     }
-// [END revokeAccess]
+    // [END revokeAccess]
 
 
     @Override
@@ -243,4 +247,21 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         // be available.
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
+
+    protected void onPause(){
+        Log.v(TAG, "onPause");
+        super.onPause();
+    }
+
+    protected void onDestroy(){
+        Log.v(TAG, "onDestroy");
+        super.onDestroy();
+        if(mProgressDialog != null && mProgressDialog.isShowing())  mProgressDialog.dismiss();
+    }
+
+    protected void onResume(){
+        Log.v(TAG, "onResume");
+        super.onResume();
+    }
+
 }
