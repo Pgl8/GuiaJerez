@@ -30,7 +30,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ExtendedTrackingActivity"
-                  android:configChanges="orientation|keyboardHidden|screenSize">
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                    android:parentActivityName=".PrincipalActivity">
         </activity>
     </application>
 
