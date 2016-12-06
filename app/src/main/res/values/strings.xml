@@ -7,4 +7,7 @@
     <string name="disconnect">Desconectar</string>
     <string name="signed_out">Desconectado</string>
     <string name="desc_google_icon">Google Logo</string>
+    <string name="tracking_quality_indicator_bad">Tracking Quality: Bad</string>
+    <string name="tracking_quality_indicator_average">Tracking Quality: Average</string>
+    <string name="tracking_quality_indicator_good">Tracking Quality: Good</string>
 </resources>
