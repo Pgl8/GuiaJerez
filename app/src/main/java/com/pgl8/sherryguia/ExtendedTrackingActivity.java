@@ -39,7 +39,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		_wikitudeSDK = new WikitudeSDK(this);
 		WikitudeSDKStartupConfiguration startupConfiguration = new WikitudeSDKStartupConfiguration(WikitudeSDKConstants.WIKITUDE_SDK_KEY, CameraSettings.CameraPosition.BACK, CameraSettings.CameraFocusMode.CONTINUOUS);
 		_wikitudeSDK.onCreate(getApplicationContext(), this, startupConfiguration);
-		ClientTracker tracker = _wikitudeSDK.getTrackerManager().create2dClientTracker("file:///android_asset/stones.wtc", new String[]{"*"});
+		ClientTracker tracker = _wikitudeSDK.getTrackerManager().create2dClientTracker("file:///android_asset/canasta.wtc", new String[]{"*"});
 		tracker.registerTrackerEventListener(this);
 	}
 
@@ -93,7 +93,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 
 	@Override
 	public void onTargetRecognized(final Tracker tracker_, final String targetName_) {
-
+		Log.d("onTargetRecognized", targetName_);
 	}
 
 	@Override
