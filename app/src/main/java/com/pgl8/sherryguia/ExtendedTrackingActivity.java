@@ -39,7 +39,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		_wikitudeSDK = new WikitudeSDK(this);
 		WikitudeSDKStartupConfiguration startupConfiguration = new WikitudeSDKStartupConfiguration(WikitudeSDKConstants.WIKITUDE_SDK_KEY, CameraSettings.CameraPosition.BACK, CameraSettings.CameraFocusMode.CONTINUOUS);
 		_wikitudeSDK.onCreate(getApplicationContext(), this, startupConfiguration);
-		ClientTracker tracker = _wikitudeSDK.getTrackerManager().create2dClientTracker("file:///android_asset/canasta.wtc", new String[]{"*"});
+		ClientTracker tracker = _wikitudeSDK.getTrackerManager().create2dClientTracker("file:///android_asset/tracker.wtc", new String[]{"*"});
 		tracker.registerTrackerEventListener(this);
 	}
 
