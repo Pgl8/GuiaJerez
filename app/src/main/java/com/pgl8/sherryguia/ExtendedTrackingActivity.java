@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.wikitude.WikitudeSDK;
 import com.wikitude.WikitudeSDKStartupConfiguration;
@@ -108,7 +109,9 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 			@Override
 			public void run() {
 				EditText trackingQualityIndicator = (EditText) findViewById(R.id.tracking_quality_indicator);
+				TextView wineName = (TextView) findViewById(R.id.wineName);
 				trackingQualityIndicator.setVisibility(View.INVISIBLE);
+				wineName.setVisibility(View.INVISIBLE);
 			}
 		});
 	}
@@ -119,10 +122,12 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 			@Override
 			public void run() {
 				EditText trackingQualityIndicator = (EditText) findViewById(R.id.tracking_quality_indicator);
+				TextView wineName = (TextView) findViewById(R.id.wineName);
 				switch (newTrackingQuality_) {
 					case -1:
 						trackingQualityIndicator.setBackgroundColor(Color.parseColor("#FF3420"));
 						trackingQualityIndicator.setText(R.string.tracking_quality_indicator_bad);
+
 						break;
 					case 0:
 						trackingQualityIndicator.setBackgroundColor(Color.parseColor("#FFD900"));
@@ -133,6 +138,8 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 						trackingQualityIndicator.setText(R.string.tracking_quality_indicator_good);
 				}
 				trackingQualityIndicator.setVisibility(View.VISIBLE);
+				wineName.setVisibility(View.VISIBLE);
+				wineName.setText(targetName_);
 			}
 		});
 	}

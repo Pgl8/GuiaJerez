@@ -18,4 +18,14 @@
 		android:layout_margin="10dp"
 		android:padding="5dp"/>
 
+	<TextView
+		android:id="@+id/wineName"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/tracking_quality_indicator"
+		android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+		android:background="#99000000"
+		android:text=""/>
+
 </RelativeLayout>
