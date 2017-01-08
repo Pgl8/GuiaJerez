@@ -1,7 +1,7 @@
 package com.pgl8.sherryguia;
 
 /**
- * Created by Pgl8 on 06/12/2016.
+ * Clase para declarar la constante de SDK Key de Wikitude
  */
 
 public class WikitudeSDKConstants {

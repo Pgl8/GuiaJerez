@@ -1,8 +1,5 @@
 package com.pgl8.sherryguia;
 
-/**
- * Created by Pgl8 on 06/12/2016.
- */
 import android.opengl.GLES20;
 import android.util.Log;
 
@@ -12,6 +9,11 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
+
+
+/**
+ * Dibuja un cuadrado al detectar un target
+ */
 
 public class StrokedRectangle {
 
