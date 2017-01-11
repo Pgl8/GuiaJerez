@@ -1,13 +1,14 @@
 package com.pgl8.sherryguia;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,9 +18,6 @@ import com.wikitude.common.camera.CameraSettings;
 import com.wikitude.common.rendering.RenderExtension;
 import com.wikitude.common.tracking.RecognizedTarget;
 import com.wikitude.rendering.ExternalRendering;
-import com.pgl8.sherryguia.CustomSurfaceView;
-import com.pgl8.sherryguia.Driver;
-import com.pgl8.sherryguia.GLRendererExtendedTracking;
 import com.wikitude.tracker.ClientTracker;
 import com.wikitude.tracker.ClientTrackerEventListener;
 import com.wikitude.tracker.Tracker;
@@ -107,10 +105,12 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				EditText trackingQualityIndicator = (EditText) findViewById(R.id.tracking_quality_indicator);
-				TextView wineName = (TextView) findViewById(R.id.wineName);
-				trackingQualityIndicator.setVisibility(View.INVISIBLE);
-				wineName.setVisibility(View.INVISIBLE);
+			ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+			EditText trackingQualityIndicator = (EditText) findViewById(R.id.tracking_quality_indicator);
+			TextView wineName = (TextView) findViewById(R.id.wineName);
+			trackingQualityIndicator.setVisibility(View.INVISIBLE);
+			wineName.setVisibility(View.INVISIBLE);
+			progressBar.setVisibility(View.INVISIBLE);
 			}
 		});
 	}
@@ -122,24 +122,34 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 			public void run() {
 				EditText trackingQualityIndicator = (EditText) findViewById(R.id.tracking_quality_indicator);
 				TextView wineName = (TextView) findViewById(R.id.wineName);
+				ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+				progressBar.setMax(3);
 				switch (newTrackingQuality_) {
 					case -1:
 						trackingQualityIndicator.setBackgroundColor(Color.parseColor("#FF3420"));
 						trackingQualityIndicator.setText(R.string.tracking_quality_indicator_bad);
-
+						progressBar.setProgress(1);
+						progressBar.setBackgroundColor(Color.parseColor("#FF3420"));
 						break;
 					case 0:
 						trackingQualityIndicator.setBackgroundColor(Color.parseColor("#FFD900"));
 						trackingQualityIndicator.setText(R.string.tracking_quality_indicator_average);
+						progressBar.setProgress(2);
+						progressBar.setBackgroundColor(Color.parseColor("#FFD900"));
 						break;
 					default:
 						trackingQualityIndicator.setBackgroundColor(Color.parseColor("#6BFF00"));
 						trackingQualityIndicator.setText(R.string.tracking_quality_indicator_good);
+						progressBar.setProgress(3);
+						progressBar.setBackgroundColor(Color.parseColor("#6BFF00"));
 				}
 				trackingQualityIndicator.setVisibility(View.VISIBLE);
 				wineName.setVisibility(View.VISIBLE);
 				wineName.setText(targetName_);
+				progressBar.setVisibility(View.VISIBLE);
 			}
 		});
 	}
+
+
 }
