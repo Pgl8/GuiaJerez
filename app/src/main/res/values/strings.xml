@@ -1,13 +1,16 @@
 <resources>
-    <string name="app_name">Sherry Guia</string>
-    <string name="action_settings">Settings</string>
-    <string name="loading">Cargando…</string>
-    <string name="signed_in_fmt">Conectado como: %s</string>
-    <string name="sign_out">Deslogear</string>
-    <string name="disconnect">Desconectar</string>
-    <string name="signed_out">Desconectado</string>
-    <string name="desc_google_icon">Google Logo</string>
-    <string name="tracking_quality_indicator_bad">Calidad Tracking: Mala</string>
-    <string name="tracking_quality_indicator_average">Calidad Tracking: Normal</string>
-    <string name="tracking_quality_indicator_good">Calidad Tracking: Buena</string>
+	<string name="app_name">Sherry Guia</string>
+	<string name="action_settings">Settings</string>
+	<string name="loading">Cargando…</string>
+	<string name="signed_in_fmt">Conectado como: %s</string>
+	<string name="sign_out">Deslogear</string>
+	<string name="disconnect">Desconectar</string>
+	<string name="signed_out">Desconectado</string>
+	<string name="desc_google_icon">Google Logo</string>
+	<string name="tracking_quality_indicator_bad">Calidad Tracking: Mala</string>
+	<string name="tracking_quality_indicator_average">Calidad Tracking: Normal</string>
+	<string name="tracking_quality_indicator_good">Calidad Tracking: Buena</string>
+	<string name="defaultDate">20/01/2017</string>
+	<string name="defaultName">Usuario López</string>
+	<string name="defaultText">Comentario de prueba largo para una mejor adaptanilidad con el layout.</string>
 </resources>
