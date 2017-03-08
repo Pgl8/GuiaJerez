@@ -1,4 +1,4 @@
-package com.pgl8.sherryguia;
+package com.pgl8.sherryguia.models;
 
 /**
  * Clase para dar forma a los comentarios de la app.
