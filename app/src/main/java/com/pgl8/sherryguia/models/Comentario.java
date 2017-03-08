@@ -9,6 +9,12 @@ public class Comentario {
 	private String usuario;
 	private String texto;
 
+	public Comentario(String date, String usuario, String texto) {
+		this.date = date;
+		this.usuario = usuario;
+		this.texto = texto;
+	}
+
 	public String getDate() {
 		return date;
 	}
