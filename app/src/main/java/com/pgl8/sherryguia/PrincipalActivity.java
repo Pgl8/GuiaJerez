@@ -37,13 +37,15 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         mStatusTextView = (TextView) findViewById(R.id.status);
 
         // Button listeners
         //findViewById(R.id.sign_in_button);
         this.findViewById(R.id.sign_in_button).setOnClickListener(this);
-        this.findViewById(R.id.sign_out_button).setOnClickListener(this);
-        this.findViewById(R.id.sign_out_and_disconnect).setOnClickListener(this);
+        //this.findViewById(R.id.sign_out_button).setOnClickListener(this);
+        //this.findViewById(R.id.disconnect_button).setOnClickListener(this);
+
 
 
         // Configure sign-in to request the user's ID, email address, and basic
@@ -65,10 +67,10 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             public void onClick(View view) {
                 /*Snackbar.make(view, "Start you VR Activity", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
-                //TODO: Insert AR class activity.
                 startActivity(new Intent(view.getContext(), ExtendedTrackingActivity.class));
             }
         });
+        fab.setVisibility(View.INVISIBLE);
 
         //SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
 
@@ -150,13 +152,17 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         if (signedIn) {
             Log.d(TAG, "Inside updateUI() signedIn");
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+            //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+            findViewById(R.id.fab).setVisibility(View.VISIBLE);
+
         } else {
             Log.d(TAG, "Inside updateUI() not signedIn");
-            mStatusTextView.setText(R.string.signed_out);
+            mStatusTextView.setText("");
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+            //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+            findViewById(R.id.fab).setVisibility(View.INVISIBLE);
+
         }
     }
 
@@ -164,6 +170,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_principal, menu);
+	    Log.d(TAG, String.valueOf(mStatusTextView.getText()));
+
         return true;
     }
 
@@ -175,7 +183,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_disconnect) {
+            signOut();
             return true;
         }
 
@@ -191,12 +200,13 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
                 Log.d(TAG, "Inside onClick() sign in button");
                 signIn();
                 break;
-            case R.id.sign_out_button:
+            /*case R.id.sign_out_button:
                 signOut();
                 break;
             case R.id.disconnect_button:
                 revokeAccess();
-                break;
+                Log.d(TAG, "Disconnect");
+                break;*/
         }
     }
 

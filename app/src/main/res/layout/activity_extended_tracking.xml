@@ -5,37 +5,25 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<EditText
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:id="@+id/tracking_quality_indicator"
-		android:focusable="false"
-		android:background="@color/colorPrimaryDark"
-		android:text="@string/tracking_quality_indicator_average"
-		android:visibility="invisible"
-		android:layout_alignParentBottom="true"
-		android:layout_centerHorizontal="true"
-		android:layout_margin="10dp"
-		android:padding="5dp"/>
-
 	<TextView
 		android:id="@+id/wineName"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_above="@+id/tracking_quality_indicator"
-		android:layout_centerHorizontal="true"
-        android:textColor="#ffffff"
+		android:textColor="#ffffff"
 		android:background="#99000000"
-		android:text=""/>
+		android:text=""
+		android:layout_above="@+id/progressBar"
+		android:layout_centerHorizontal="true"
+		android:layout_marginBottom="31dp"/>
 
 	<ProgressBar
 		android:id="@+id/progressBar"
 		style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
 		android:layout_width="300dp"
 		android:layout_height="wrap_content"
-		android:layout_above="@+id/wineName"
-		android:layout_centerHorizontal="true"
-		android:layout_marginBottom="15dp"/>
+		android:layout_marginBottom="55dp"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

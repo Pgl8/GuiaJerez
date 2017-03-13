@@ -1,12 +1,10 @@
 package com.pgl8.sherryguia;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -37,7 +35,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		_wikitudeSDK = new WikitudeSDK(this);
 		WikitudeSDKStartupConfiguration startupConfiguration = new WikitudeSDKStartupConfiguration(WikitudeSDKConstants.WIKITUDE_SDK_KEY, CameraSettings.CameraPosition.BACK, CameraSettings.CameraFocusMode.CONTINUOUS);
 		_wikitudeSDK.onCreate(getApplicationContext(), this, startupConfiguration);
-		ClientTracker tracker = _wikitudeSDK.getTrackerManager().create2dClientTracker("file:///android_asset/tracker.wtc", new String[]{"*"});
+		ClientTracker tracker = _wikitudeSDK.getTrackerManager().create2dClientTracker("file:///android_asset/tracker2.wtc", new String[]{"*"});
 		tracker.registerTrackerEventListener(this);
 	}
 
@@ -106,11 +104,13 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 			@Override
 			public void run() {
 			ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-			EditText trackingQualityIndicator = (EditText) findViewById(R.id.tracking_quality_indicator);
+			//EditText trackingQualityIndicator = (EditText) findViewById(R.id.tracking_quality_indicator);
 			TextView wineName = (TextView) findViewById(R.id.wineName);
-			trackingQualityIndicator.setVisibility(View.INVISIBLE);
-			wineName.setVisibility(View.INVISIBLE);
-			progressBar.setVisibility(View.INVISIBLE);
+			//trackingQualityIndicator.setVisibility(View.INVISIBLE);
+				assert wineName != null;
+				wineName.setVisibility(View.INVISIBLE);
+				assert progressBar != null;
+				progressBar.setVisibility(View.INVISIBLE);
 			}
 		});
 	}
@@ -120,30 +120,32 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				EditText trackingQualityIndicator = (EditText) findViewById(R.id.tracking_quality_indicator);
+				//EditText trackingQualityIndicator = (EditText) findViewById(R.id.tracking_quality_indicator);
 				TextView wineName = (TextView) findViewById(R.id.wineName);
 				ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-				progressBar.setMax(3);
+					assert progressBar != null;
+					progressBar.setMax(3);
 				switch (newTrackingQuality_) {
 					case -1:
-						trackingQualityIndicator.setBackgroundColor(Color.parseColor("#FF3420"));
-						trackingQualityIndicator.setText(R.string.tracking_quality_indicator_bad);
+						//trackingQualityIndicator.setBackgroundColor(Color.parseColor("#FF3420"));
+						//trackingQualityIndicator.setText(R.string.tracking_quality_indicator_bad);
 						progressBar.setProgress(1);
-						progressBar.setBackgroundColor(Color.parseColor("#FF3420"));
+						//progressBar.setBackgroundColor(Color.parseColor("#FF3420"));
 						break;
 					case 0:
-						trackingQualityIndicator.setBackgroundColor(Color.parseColor("#FFD900"));
-						trackingQualityIndicator.setText(R.string.tracking_quality_indicator_average);
+						//trackingQualityIndicator.setBackgroundColor(Color.parseColor("#FFD900"));
+						//trackingQualityIndicator.setText(R.string.tracking_quality_indicator_average);
 						progressBar.setProgress(2);
-						progressBar.setBackgroundColor(Color.parseColor("#FFD900"));
+						//progressBar.setBackgroundColor(Color.parseColor("#FFD900"));
 						break;
 					default:
-						trackingQualityIndicator.setBackgroundColor(Color.parseColor("#6BFF00"));
-						trackingQualityIndicator.setText(R.string.tracking_quality_indicator_good);
+						//trackingQualityIndicator.setBackgroundColor(Color.parseColor("#6BFF00"));
+						//trackingQualityIndicator.setText(R.string.tracking_quality_indicator_good);
 						progressBar.setProgress(3);
-						progressBar.setBackgroundColor(Color.parseColor("#6BFF00"));
+						//progressBar.setBackgroundColor(Color.parseColor("#6BFF00"));
 				}
-				trackingQualityIndicator.setVisibility(View.VISIBLE);
+				//trackingQualityIndicator.setVisibility(View.VISIBLE);
+				assert wineName != null;
 				wineName.setVisibility(View.VISIBLE);
 				wineName.setText(targetName_);
 				progressBar.setVisibility(View.VISIBLE);
