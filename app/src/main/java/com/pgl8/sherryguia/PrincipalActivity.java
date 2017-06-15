@@ -4,13 +4,16 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -21,6 +24,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.squareup.picasso.Picasso;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class PrincipalActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
@@ -28,7 +34,9 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     private static final String TAG = "PrincipalActivity";
     private static final int RC_SIGN_IN = 9001;
     private ProgressDialog mProgressDialog;
-    private TextView mStatusTextView;
+    private boolean mConnected;
+	private TextView mTextView;
+	private ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +45,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        mStatusTextView = (TextView) findViewById(R.id.status);
+		mTextView = (TextView) findViewById(R.id.textView);
+	    mImageView = (ImageView) findViewById(R.id.imageView);
 
         // Button listeners
         //findViewById(R.id.sign_in_button);
@@ -139,9 +147,14 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+            //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+	        mTextView.setText(acct.getDisplayName());
+	        Picasso.with(this).load(acct.getPhotoUrl()).transform(new CropCircleTransformation()).into(mImageView);
+            mConnected = true;
             updateUI(true);
         } else {
+            mConnected = false;
+
             // Signed out, show unauthenticated UI.
             updateUI(false);
         }
@@ -151,16 +164,17 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         Log.d(TAG, "Inside updateUI()");
         if (signedIn) {
             Log.d(TAG, "Inside updateUI() signedIn");
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+            findViewById(R.id.sign_in_button).setVisibility(View.INVISIBLE);
+	        mImageView.setVisibility(View.VISIBLE);
             //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
             findViewById(R.id.fab).setVisibility(View.VISIBLE);
 
         } else {
             Log.d(TAG, "Inside updateUI() not signedIn");
-            mStatusTextView.setText("");
-
+            mTextView.setText(R.string.inicia);
+	        mImageView.setVisibility(View.INVISIBLE);
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+	        //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
             findViewById(R.id.fab).setVisibility(View.INVISIBLE);
 
         }
@@ -170,7 +184,6 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_principal, menu);
-	    Log.d(TAG, String.valueOf(mStatusTextView.getText()));
 
         return true;
     }
@@ -185,6 +198,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_disconnect) {
             signOut();
+            //revokeAccess();
             return true;
         }
 
@@ -213,6 +227,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     // [START signIn]
     private void signIn() {
         Log.d(TAG, "Inside signIn()");
+        mConnected = true;
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -221,15 +236,20 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     // [START signOut]
     private void signOut() {
         Log.d(TAG, "Inside signOut()");
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                        // [START_EXCLUDE]
-                        updateUI(false);
-                        // [END_EXCLUDE]
-                    }
-                });
+        if(mConnected) {
+            Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                    new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(Status status) {
+                            mConnected = false;
+                            // [START_EXCLUDE]
+                            updateUI(false);
+                            // [END_EXCLUDE]
+                        }
+                    });
+        }else{
+            Toast.makeText(this, "Ya se encuentra desconectado", Toast.LENGTH_SHORT).show();
+        }
     }
     // [END signOut]
 

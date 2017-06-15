@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Por favor inicia sesión con Google"
+        android:text="@string/inicia"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="66dp"
@@ -38,15 +38,14 @@
         tools:visibility="gone"/>
 
 
-    <TextView
-        android:id="@+id/status"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_light"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="21dp"
+        android:visibility="invisible"/>
 
 </RelativeLayout>
