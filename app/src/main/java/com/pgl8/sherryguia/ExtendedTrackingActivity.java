@@ -1,5 +1,6 @@
 package com.pgl8.sherryguia;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wikitude.WikitudeSDK;
 import com.wikitude.WikitudeSDKStartupConfiguration;
@@ -20,6 +22,8 @@ import com.wikitude.tracker.ClientTracker;
 import com.wikitude.tracker.ClientTrackerEventListener;
 import com.wikitude.tracker.Tracker;
 
+import org.xml.sax.Locator;
+
 public class ExtendedTrackingActivity extends AppCompatActivity implements ClientTrackerEventListener, ExternalRendering {
 
 	private static final String TAG = "ExtendedTracking";
@@ -28,6 +32,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 	private CustomSurfaceView _view;
 	private Driver _driver;
 	private GLRendererExtendedTracking _glRenderer;
+	private Location mLocation;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,17 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		_wikitudeSDK.onCreate(getApplicationContext(), this, startupConfiguration);
 		ClientTracker tracker = _wikitudeSDK.getTrackerManager().create2dClientTracker("file:///android_asset/tracker2.wtc", new String[]{"*"});
 		tracker.registerTrackerEventListener(this);
+
+		GPSTracker gps = new GPSTracker(this);
+		if(gps.canGetLocation()){
+			mLocation = gps.loc;
+			//double longitude = gps.getLongitude();
+			//double latitude = gps.getLatitude();
+			//Toast.makeText(this, "Location: " + gps.getLatitude() + ", " + gps.getLongitude(), Toast.LENGTH_LONG).show();
+			Log.d("Longitude: ", String.valueOf(gps.getLongitude()));
+			Log.d("Latitude: ", String.valueOf(gps.getLatitude()));
+		}
+
 	}
 
 	@Override
@@ -90,6 +106,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 	@Override
 	public void onTargetRecognized(final Tracker tracker_, final String targetName_) {
 		Log.d("onTargetRecognized", targetName_);
+
 	}
 
 	@Override
