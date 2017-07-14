@@ -48,7 +48,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 			mLocation = gps.loc;
 			//double longitude = gps.getLongitude();
 			//double latitude = gps.getLatitude();
-			//Toast.makeText(this, "Location: " + gps.getLatitude() + ", " + gps.getLongitude(), Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Location: " + gps.getLatitude() + ", " + gps.getLongitude(), Toast.LENGTH_LONG).show();
 			Log.d("Longitude: ", String.valueOf(gps.getLongitude()));
 			Log.d("Latitude: ", String.valueOf(gps.getLatitude()));
 		}
