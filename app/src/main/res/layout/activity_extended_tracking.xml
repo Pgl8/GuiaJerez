@@ -25,5 +25,30 @@
 		android:layout_alignParentBottom="true"
 		android:layout_centerHorizontal="true"/>
 
+	<Button
+		android:id="@+id/button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/wineName"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentRight="true"
+		android:layout_marginBottom="132dp"
+		android:layout_marginEnd="22dp"
+		android:layout_marginRight="22dp"
+		android:visibility="gone"
+		android:text="Comentarios"/>
+
+	<Button
+		android:id="@+id/button2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:layout_alignTop="@+id/button"
+		android:layout_marginLeft="24dp"
+		android:layout_marginStart="24dp"
+		android:visibility="gone"
+		android:text="Información"/>
+
 
 </RelativeLayout>

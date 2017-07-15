@@ -7,13 +7,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 
 /**
  * Clase con utilidades generales
  */
 
-public class Utilidades implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+/*public class Utilidades implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     GoogleApiClient mApiClient;
     Location mLocation;
@@ -40,5 +41,31 @@ public class Utilidades implements GoogleApiClient.ConnectionCallbacks, GoogleAp
     }
 
     //public void
+
+}*/
+
+public class Utilidades {
+
+    private Context mContext;
+    private Location mLocation;
+
+    public Utilidades(Context context){
+        this.mContext = context;
+    }
+
+    public Location getLocation(){
+
+        final LocationListener mLocationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                //Toast.makeText(mContext, location.toString(), Toast.LENGTH_LONG).show();
+                mLocation = location;
+            }
+        };
+
+        return mLocation;
+    }
+
+
 
 }

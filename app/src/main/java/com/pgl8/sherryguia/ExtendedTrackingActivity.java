@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -22,8 +23,6 @@ import com.wikitude.tracker.ClientTracker;
 import com.wikitude.tracker.ClientTrackerEventListener;
 import com.wikitude.tracker.Tracker;
 
-import org.xml.sax.Locator;
-
 public class ExtendedTrackingActivity extends AppCompatActivity implements ClientTrackerEventListener, ExternalRendering {
 
 	private static final String TAG = "ExtendedTracking";
@@ -33,6 +32,11 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 	private Driver _driver;
 	private GLRendererExtendedTracking _glRenderer;
 	private Location mLocation;
+	private ProgressBar progressBar;
+	private TextView wineName;
+	private Button button1;
+	private Button button2;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,10 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 			Log.d("Latitude: ", String.valueOf(gps.getLatitude()));
 		}
 
+		progressBar = (ProgressBar) findViewById(R.id.progressBar);
+		wineName = (TextView) findViewById(R.id.wineName);
+		button1 = (Button) findViewById(R.id.button);
+		button2 = (Button) findViewById(R.id.button2);
 	}
 
 	@Override
@@ -120,14 +128,11 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-			ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-			//EditText trackingQualityIndicator = (EditText) findViewById(R.id.tracking_quality_indicator);
-			TextView wineName = (TextView) findViewById(R.id.wineName);
-			//trackingQualityIndicator.setVisibility(View.INVISIBLE);
-				assert wineName != null;
+
 				wineName.setVisibility(View.INVISIBLE);
-				assert progressBar != null;
 				progressBar.setVisibility(View.INVISIBLE);
+				button1.setVisibility(View.INVISIBLE);
+				button2.setVisibility(View.INVISIBLE);
 			}
 		});
 	}
@@ -137,35 +142,32 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				//EditText trackingQualityIndicator = (EditText) findViewById(R.id.tracking_quality_indicator);
-				TextView wineName = (TextView) findViewById(R.id.wineName);
-				ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-					assert progressBar != null;
-					progressBar.setMax(3);
+
+				assert progressBar != null;
+				progressBar.setMax(3);
+
 				switch (newTrackingQuality_) {
 					case -1:
-						//trackingQualityIndicator.setBackgroundColor(Color.parseColor("#FF3420"));
-						//trackingQualityIndicator.setText(R.string.tracking_quality_indicator_bad);
+
 						progressBar.setProgress(1);
-						//progressBar.setBackgroundColor(Color.parseColor("#FF3420"));
 						break;
+
 					case 0:
-						//trackingQualityIndicator.setBackgroundColor(Color.parseColor("#FFD900"));
-						//trackingQualityIndicator.setText(R.string.tracking_quality_indicator_average);
+
 						progressBar.setProgress(2);
-						//progressBar.setBackgroundColor(Color.parseColor("#FFD900"));
 						break;
+
 					default:
-						//trackingQualityIndicator.setBackgroundColor(Color.parseColor("#6BFF00"));
-						//trackingQualityIndicator.setText(R.string.tracking_quality_indicator_good);
+
 						progressBar.setProgress(3);
-						//progressBar.setBackgroundColor(Color.parseColor("#6BFF00"));
+
 				}
-				//trackingQualityIndicator.setVisibility(View.VISIBLE);
-				assert wineName != null;
+
 				wineName.setVisibility(View.VISIBLE);
 				wineName.setText(targetName_);
 				progressBar.setVisibility(View.VISIBLE);
+				button1.setVisibility(View.VISIBLE);
+				button2.setVisibility(View.VISIBLE);
 			}
 		});
 	}
