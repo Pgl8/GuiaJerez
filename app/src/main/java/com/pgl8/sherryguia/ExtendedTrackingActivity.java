@@ -1,5 +1,6 @@
 package com.pgl8.sherryguia;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +62,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		wineName = (TextView) findViewById(R.id.wineName);
 		button1 = (Button) findViewById(R.id.button);
 		button2 = (Button) findViewById(R.id.button2);
+
 	}
 
 	@Override
@@ -115,6 +117,14 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 	public void onTargetRecognized(final Tracker tracker_, final String targetName_) {
 		Log.d("onTargetRecognized", targetName_);
 
+		button2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(ExtendedTrackingActivity.this, DetailsActivity.class);
+				intent.putExtra("wine", targetName_);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<RelativeLayout
+
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		tools:context="com.pgl8.sherryguia.DetailsActivity">
+
+		<ImageView
+			android:id="@+id/imageView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:srcCompat="@android:drawable/sym_def_app_icon"
+			tools:layout_editor_absoluteX="168dp"
+			tools:layout_editor_absoluteY="43dp"
+			android:layout_below="@+id/textView5"
+			android:layout_centerHorizontal="true"/>
+
+		<TextView
+			android:id="@+id/tituloText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="24dp"
+			android:text="Título"
+			android:textAlignment="viewStart"
+			android:textColor="@color/colorPrimaryDark"
+			android:textSize="18sp"
+			android:textStyle="bold"
+			tools:layout_editor_absoluteX="174dp"
+			tools:layout_editor_absoluteY="128dp"
+			android:layout_below="@+id/imageView"
+			android:layout_centerHorizontal="true"/>
+
+		<TextView
+			android:id="@+id/textView1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Descripción"
+			android:textAlignment="center"
+			android:textColor="@color/colorAccent"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			tools:layout_editor_absoluteX="149dp"
+			tools:layout_editor_absoluteY="160dp"
+			android:layout_below="@+id/tituloText"
+			android:layout_centerHorizontal="true"
+			android:layout_marginTop="19dp"/>
+
+		<TextView
+			android:id="@+id/descripcionText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="TextView"
+			tools:layout_editor_absoluteX="163dp"
+			tools:layout_editor_absoluteY="193dp"
+			android:layout_below="@+id/textView1"
+			android:layout_centerHorizontal="true"
+			android:layout_marginTop="20dp"/>
+
+		<TextView
+			android:id="@+id/textView2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Tipo de uva"
+			android:textColor="@color/colorAccent"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			tools:layout_editor_absoluteX="150dp"
+			tools:layout_editor_absoluteY="225dp"
+			android:layout_marginTop="20dp"
+			android:layout_below="@+id/descripcionText"
+			android:layout_alignLeft="@+id/textView1"
+			android:layout_alignStart="@+id/textView1"/>
+
+		<TextView
+			android:id="@+id/tipoUvaText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="TextView"
+			tools:layout_editor_absoluteX="162dp"
+			tools:layout_editor_absoluteY="255dp"
+			android:layout_below="@+id/textView2"
+			android:layout_alignLeft="@+id/descripcionText"
+			android:layout_alignStart="@+id/descripcionText"
+			android:layout_marginTop="19dp"/>
+
+		<TextView
+			android:id="@+id/textView3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Viñedos"
+			android:textColor="@color/colorAccent"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			tools:layout_editor_absoluteX="163dp"
+			tools:layout_editor_absoluteY="288dp"
+			android:layout_below="@+id/tipoUvaText"
+			android:layout_alignLeft="@+id/tipoUvaText"
+			android:layout_alignStart="@+id/tipoUvaText"
+			android:layout_marginTop="19dp"/>
+
+		<TextView
+			android:id="@+id/vinedoText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="TextView"
+			tools:layout_editor_absoluteX="162dp"
+			tools:layout_editor_absoluteY="321dp"
+			android:layout_below="@+id/textView3"
+			android:layout_alignLeft="@+id/textView3"
+			android:layout_alignStart="@+id/textView3"
+			android:layout_marginTop="21dp"/>
+
+		<TextView
+			android:id="@+id/textView4"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Graduación"
+			android:textColor="@color/colorAccent"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			tools:layout_editor_absoluteX="151dp"
+			tools:layout_editor_absoluteY="352dp"
+			android:layout_below="@+id/vinedoText"
+			android:layout_centerHorizontal="true"
+			android:layout_marginTop="21dp"/>
+
+		<TextView
+			android:id="@+id/graduacionText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="TextView"
+			tools:layout_editor_absoluteX="162dp"
+			tools:layout_editor_absoluteY="385dp"
+			android:layout_below="@+id/textView4"
+			android:layout_alignRight="@+id/textView3"
+			android:layout_alignEnd="@+id/textView3"
+			android:layout_marginTop="19dp"/>
+
+		<TextView
+			android:id="@+id/textView5"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Tipo de vino"
+			android:textColor="@color/colorAccent"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			tools:layout_editor_absoluteX="148dp"
+			tools:layout_editor_absoluteY="417dp"/>
+
+		<TextView
+			android:id="@+id/tipoVinoText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="TextView"
+			tools:layout_editor_absoluteX="162dp"
+			tools:layout_editor_absoluteY="449dp"/>
+
+	</RelativeLayout>
+
+
+</ScrollView>
+
