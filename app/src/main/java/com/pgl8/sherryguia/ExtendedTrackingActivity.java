@@ -45,7 +45,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		_wikitudeSDK = new WikitudeSDK(this);
 		WikitudeSDKStartupConfiguration startupConfiguration = new WikitudeSDKStartupConfiguration(WikitudeSDKConstants.WIKITUDE_SDK_KEY, CameraSettings.CameraPosition.BACK, CameraSettings.CameraFocusMode.CONTINUOUS);
 		_wikitudeSDK.onCreate(getApplicationContext(), this, startupConfiguration);
-		ClientTracker tracker = _wikitudeSDK.getTrackerManager().create2dClientTracker("file:///android_asset/tracker2.wtc", new String[]{"*"});
+		ClientTracker tracker = _wikitudeSDK.getTrackerManager().create2dClientTracker("file:///android_asset/tracker2.wtc");
 		tracker.registerTrackerEventListener(this);
 
 		GPSTracker gps = new GPSTracker(this);
