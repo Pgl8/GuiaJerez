@@ -36,9 +36,13 @@
 			android:configChanges="orientation|keyboardHidden|screenSize"
 			android:parentActivityName=".PrincipalActivity">
 		</activity>
-		<activity android:name=".CommentsActivity">
+		<activity android:name=".CommentsActivity"
+		          android:configChanges="orientation|keyboardHidden|screenSize"
+		          android:parentActivityName=".ExtendedTrackingActivity">
 		</activity>
-		<activity android:name=".DetailsActivity">
+		<activity android:name=".DetailsActivity"
+		          android:configChanges="orientation|keyboardHidden|screenSize"
+		          android:parentActivityName=".ExtendedTrackingActivity">
 		</activity>
 	</application>
 

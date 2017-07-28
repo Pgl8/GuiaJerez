@@ -6,53 +6,58 @@ package com.pgl8.sherryguia.models;
 
 public class Vino {
 	private String nombre;
-	private String definicion;
-	private String tipoUva;
+	private String descripcion;
+	private String tipo_uva;
 	private String graduacion;
-	private String tipo;
-	private String contenidoAz;
+	private String tipo_vino;
+	private String contenido;
 	private String elaboracion;
-	private String notaCata;
+	private String nota_cata;
 	private String consumo;
+	private String vinedo;
 
-	public Vino(String nombre, String definicion, String tipoUva, String graduacion, String tipo, String contenidoAz, String elaboracion, String notaCata, String consumo) {
+	public Vino(String nombre, String descripcion, String tipoUva, String graduacion, String tipo, String contenido, String elaboracion, String notaCata, String consumo, String vinedo) {
 		this.nombre = nombre;
-		this.definicion = definicion;
-		this.tipoUva = tipoUva;
+		this.descripcion = descripcion;
+		this.tipo_uva = tipoUva;
 		this.graduacion = graduacion;
-		this.tipo = tipo;
-		this.contenidoAz = contenidoAz;
+		this.tipo_vino = tipo;
+		this.contenido = contenido;
 		this.elaboracion = elaboracion;
-		this.notaCata = notaCata;
+		this.nota_cata = notaCata;
 		this.consumo = consumo;
+		this.vinedo = vinedo;
 	}
 
 	// Getters
 	public String getNombre() {
 		return nombre;
 	}
-	public String getDefinicion() {
-		return definicion;
+	public String getDescripcion() {
+		return descripcion;
 	}
 	public String getTipoUva() {
-		return tipoUva;
+		return tipo_uva;
 	}
 	public String getGraduacion() {
 		return graduacion;
 	}
 	public String getTipo() {
-		return tipo;
+		return tipo_vino;
 	}
-	public String getContenidoAz() {
-		return contenidoAz;
+	public String getContenido() {
+		return contenido;
 	}
 	public String getElaboracion() {
 		return elaboracion;
 	}
 	public String getNotaCata() {
-		return notaCata;
+		return nota_cata;
 	}
 	public String getConsumo() {
 		return consumo;
+	}
+	public String getVinedo() {
+		return vinedo;
 	}
 }
