@@ -61,6 +61,17 @@ public class CommentsActivity extends AppCompatActivity {
 		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 5));
 		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 5));
 		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
 
 		if(comentarios.size() <= 0){
 
