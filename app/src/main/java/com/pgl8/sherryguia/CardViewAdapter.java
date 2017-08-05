@@ -8,16 +8,22 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.pgl8.sherryguia.models.Comentario;
+
+import java.util.List;
+
 /**
  * Custom adapter for the CardView.
  */
 
 public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.CustomViewHolder>{
+
 	private Context context;
+	private List<Comentario> comentarios;
 
-
-	public CardViewAdapter(Context context) {
+	public CardViewAdapter(Context context, List<Comentario> comentarios) {
 		this.context = context;
+		this.comentarios = comentarios;
 	}
 
 	@Override
@@ -28,12 +34,16 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.Custom
 
 	@Override
 	public void onBindViewHolder(CustomViewHolder holder, int position) {
-
+		Comentario comentario = comentarios.get(position);
+		holder.fecha.setText(comentario.getFecha());
+		holder.usuario.setText(comentario.getUsuario());
+		holder.comentario.setText(comentario.getTexto());
+		holder.ratingBar.setRating(comentario.getRating());
 	}
 
 	@Override
 	public int getItemCount() {
-		return 0;
+		return comentarios.size();
 	}
 
 	public class CustomViewHolder extends RecyclerView.ViewHolder {

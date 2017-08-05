@@ -23,7 +23,7 @@ import java.util.Scanner;
 
 public class DetailsActivity extends AppCompatActivity {
 	// URL local, cambiar a servidor.
-	private final String url = "http://192.168.1.38:8080/conexiondb/demo/vinoService/vino/";
+	private final String url = "http://192.168.1.34:8080/conexiondb/demo/vinoService/vino/";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,19 +102,23 @@ public class DetailsActivity extends AppCompatActivity {
 
 			mDialog.dismiss();
 
-			Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-			Vino vino = gson.fromJson(jsonResponse, Vino.class);
+			if(jsonResponse.isEmpty()){
+				Toast.makeText(DetailsActivity.this, "Hubo un problema de conexión.", Toast.LENGTH_LONG).show();
+			}else{
+				Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+				Vino vino = gson.fromJson(jsonResponse, Vino.class);
 
-			titulo.setText(vino.getNombre());
-			descripcion.setText(vino.getDescripcion());
-			tipoUva.setText(vino.getTipoUva());
-			vinedo.setText(vino.getVinedo());
-			graduacion.setText(vino.getGraduacion());
-			tipoVino.setText(vino.getTipo());
-			contenido.setText(vino.getContenido());
-			elaboracion.setText(vino.getElaboracion());
-			notasCata.setText(vino.getNotaCata());
-			consumo.setText(vino.getConsumo());
+				titulo.setText(vino.getNombre());
+				descripcion.setText(vino.getDescripcion());
+				tipoUva.setText(vino.getTipoUva());
+				vinedo.setText(vino.getVinedo());
+				graduacion.setText(vino.getGraduacion());
+				tipoVino.setText(vino.getTipo());
+				contenido.setText(vino.getContenido());
+				elaboracion.setText(vino.getElaboracion());
+				notasCata.setText(vino.getNotaCata());
+				consumo.setText(vino.getConsumo());
+			}
 		}
 	}
 }

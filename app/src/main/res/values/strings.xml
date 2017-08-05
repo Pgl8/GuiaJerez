@@ -12,6 +12,6 @@
 	<string name="tracking_quality_indicator_good">Calidad Tracking: Buena</string>
 	<string name="defaultDate">20/01/2017</string>
 	<string name="defaultName">Usuario López</string>
-	<string name="defaultText">Comentario de prueba largo para una mejor adaptanilidad con el layout.</string>
+	<string name="defaultText">Comentario de prueba largo para una mejor adaptabilidad con el layout.</string>
 	<string name="inicia">Por favor inicia sesión con Google</string>
 </resources>

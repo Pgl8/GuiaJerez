@@ -2,6 +2,7 @@ package com.pgl8.sherryguia;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -37,6 +38,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     private boolean mConnected;
 	private TextView mTextView;
 	private ImageView mImageView;
+    public String accountName;
+    public String accountPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +78,11 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             public void onClick(View view) {
                 /*Snackbar.make(view, "Start you VR Activity", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
-                startActivity(new Intent(view.getContext(), ExtendedTrackingActivity.class));
+                Intent intent = new Intent(view.getContext(), ExtendedTrackingActivity.class);
+                intent.putExtra("accountName", accountName);
+                intent.putExtra("accountPhoto", accountPhoto);
+                startActivity(intent);
+
             }
         });
         fab.setVisibility(View.INVISIBLE);
@@ -148,6 +155,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+            accountName = acct.getDisplayName();
+            accountPhoto = acct.getPhotoUrl().toString();
 	        mTextView.setText(acct.getDisplayName());
 	        Picasso.with(this).load(acct.getPhotoUrl()).transform(new CropCircleTransformation()).into(mImageView);
             mConnected = true;

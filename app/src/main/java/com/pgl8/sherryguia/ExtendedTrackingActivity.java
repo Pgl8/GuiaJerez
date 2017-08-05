@@ -2,6 +2,7 @@ package com.pgl8.sherryguia;
 
 import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -37,7 +38,8 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 	private TextView wineName;
 	private Button button1;
 	private Button button2;
-
+	public String accountName;
+	public String accountPhoto;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,11 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		wineName = (TextView) findViewById(R.id.wineName);
 		button1 = (Button) findViewById(R.id.button);
 		button2 = (Button) findViewById(R.id.button2);
+
+		Intent intent = getIntent();
+		accountName = intent.getStringExtra("accountName");
+		accountPhoto = intent.getStringExtra("accountPhoto");
+
 
 	}
 
@@ -122,7 +129,19 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 			public void onClick(View view) {
 				Intent intent = new Intent(ExtendedTrackingActivity.this, DetailsActivity.class);
 				intent.putExtra("wine", targetName_);
+				intent.putExtra("accountName", accountName);
+				intent.putExtra("accountPhoto", accountPhoto);
 				startActivity(intent);
+			}
+		});
+
+		button1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent1 = new Intent(ExtendedTrackingActivity.this, CommentsActivity.class);
+				intent1.putExtra("accountName", accountName);
+				intent1.putExtra("accountPhoto", accountPhoto);
+				startActivity(intent1);
 			}
 		});
 	}
@@ -149,6 +168,8 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 
 	@Override
 	public void onExtendedTrackingQualityUpdate(final Tracker tracker_, final String targetName_, final int oldTrackingQuality_, final int newTrackingQuality_) {
+		Log.d(TAG, "onExtendedTrackingQualityUpdateOld: " + oldTrackingQuality_);
+		Log.d(TAG, "onExtendedTrackingQualityUpdateNew: " + newTrackingQuality_);
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
