@@ -1,19 +1,15 @@
 package com.pgl8.sherryguia;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.pgl8.sherryguia.models.Comentario;
 import com.squareup.picasso.Picasso;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,21 +53,13 @@ public class CommentsActivity extends AppCompatActivity {
 
 	private void data() {
 		comentarios = new ArrayList<>();
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 5));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 5));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 5));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
-		comentarios.add(new Comentario("Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario(1, "Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 5));
+		comentarios.add(new Comentario(2, "Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 5));
+		comentarios.add(new Comentario(3, "Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 5));
+		comentarios.add(new Comentario(4, "Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario(5, "Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario(6, "Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
+		comentarios.add(new Comentario(7, "Paco Perez", "Comentario prueba", new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY).format(new Date(2017, 8, 4)), 4));
 
 		if(comentarios.size() <= 0){
 

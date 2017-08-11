@@ -5,6 +5,7 @@ package com.pgl8.sherryguia.models;
  */
 
 public class Vino {
+	private int id;
 	private String nombre;
 	private String descripcion;
 	private String tipo_uva;
@@ -16,7 +17,8 @@ public class Vino {
 	private String consumo;
 	private String vinedo;
 
-	public Vino(String nombre, String descripcion, String tipoUva, String graduacion, String tipo, String contenido, String elaboracion, String notaCata, String consumo, String vinedo) {
+	public Vino(int id, String nombre, String descripcion, String tipoUva, String graduacion, String tipo, String contenido, String elaboracion, String notaCata, String consumo, String vinedo) {
+		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.tipo_uva = tipoUva;
@@ -59,5 +61,13 @@ public class Vino {
 	}
 	public String getVinedo() {
 		return vinedo;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

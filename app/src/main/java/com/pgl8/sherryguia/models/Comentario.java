@@ -7,12 +7,14 @@ import java.util.Date;
  */
 
 public class Comentario {
+	private int id;
 	private String usuario;
 	private String texto;
 	private String fecha;
 	private int rating;
 
-	public Comentario(String usuario, String texto, String fecha, int rating) {
+	public Comentario(int id, String usuario, String texto, String fecha, int rating) {
+		this.id = id;
 		this.usuario = usuario;
 		this.texto = texto;
 		this.fecha = fecha;
@@ -59,5 +61,13 @@ public class Comentario {
 				", fecha='" + fecha + '\'' +
 				", rating=" + rating +
 				'}';
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

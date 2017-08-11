@@ -5,10 +5,11 @@ package com.pgl8.sherryguia.models;
  */
 
 public class Usuario {
+	private int id;
 	private String nombre;
 
 	// Constructor
-	public Usuario(String nombre) {
+	public Usuario(int id, String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -19,6 +20,10 @@ public class Usuario {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 }
