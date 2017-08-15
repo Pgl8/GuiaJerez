@@ -33,10 +33,10 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_alignParentBottom="true"
+				android:autoText="true"
 				android:ems="10"
 				android:hint="Comentario"
-				android:inputType="textShortMessage"
-				/>
+				android:inputType="textShortMessage" />
 
 			<ImageView
 				android:id="@+id/imageComment"
@@ -46,6 +46,15 @@
 				android:layout_centerHorizontal="true"
 				android:layout_marginTop="12dp"
 				app:srcCompat="@mipmap/ic_launcher"/>
+
+			<Button
+				android:id="@+id/buttonEnviar"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentEnd="true"
+				android:layout_alignParentRight="true"
+				android:layout_alignTop="@+id/editText"
+				android:text="Enviar" />
 		</RelativeLayout>
 
 	</LinearLayout>

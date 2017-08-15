@@ -33,7 +33,6 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 	private CustomSurfaceView _view;
 	private Driver _driver;
 	private GLRendererExtendedTracking _glRenderer;
-	private Location mLocation;
 	private ProgressBar progressBar;
 	private TextView wineName;
 	private Button button1;
@@ -49,16 +48,6 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		_wikitudeSDK.onCreate(getApplicationContext(), this, startupConfiguration);
 		ClientTracker tracker = _wikitudeSDK.getTrackerManager().create2dClientTracker("file:///android_asset/tracker2.wtc");
 		tracker.registerTrackerEventListener(this);
-
-		GPSTracker gps = new GPSTracker(this);
-		if(gps.canGetLocation()){
-			mLocation = gps.loc;
-			//double longitude = gps.getLongitude();
-			//double latitude = gps.getLatitude();
-			Toast.makeText(this, "Location: " + gps.getLatitude() + ", " + gps.getLongitude(), Toast.LENGTH_LONG).show();
-			Log.d("Longitude: ", String.valueOf(gps.getLongitude()));
-			Log.d("Latitude: ", String.valueOf(gps.getLatitude()));
-		}
 
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
 		wineName = (TextView) findViewById(R.id.wineName);
@@ -141,6 +130,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 				Intent intent1 = new Intent(ExtendedTrackingActivity.this, CommentsActivity.class);
 				intent1.putExtra("accountName", accountName);
 				intent1.putExtra("accountPhoto", accountPhoto);
+                intent1.putExtra("wineName", targetName_);
 				startActivity(intent1);
 			}
 		});

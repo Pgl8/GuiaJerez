@@ -2,6 +2,7 @@ package com.pgl8.sherryguia;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -40,6 +41,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
 	private ImageView mImageView;
     public String accountName;
     public String accountPhoto;
+    private Location mLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,13 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         fab.setVisibility(View.INVISIBLE);
 
         //SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+
+        GPSTracker gps = new GPSTracker(this);
+        if(gps.canGetLocation()){
+            mLocation = gps.loc;
+            Toast.makeText(this, "Location: " + gps.getLatitude() + ", " + gps.getLongitude(), Toast.LENGTH_LONG).show();
+
+        }
 
     }
 
@@ -157,10 +166,12 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             accountName = acct.getDisplayName();
             accountPhoto = acct.getPhotoUrl().toString();
+
 	        mTextView.setText(acct.getDisplayName());
 	        Picasso.with(this).load(acct.getPhotoUrl()).transform(new CropCircleTransformation()).into(mImageView);
             mConnected = true;
             updateUI(true);
+
         } else {
             mConnected = false;
 

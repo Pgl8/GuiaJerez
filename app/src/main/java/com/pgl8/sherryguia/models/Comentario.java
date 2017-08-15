@@ -1,40 +1,51 @@
 package com.pgl8.sherryguia.models;
 
-import java.util.Date;
 
 /**
  * Clase para dar forma a los comentarios de la app.
  */
 
 public class Comentario {
-	private int id;
-	private String usuario;
-	private String texto;
+	private String vino;
+	private String comentario;
+	private int puntuacion;
 	private String fecha;
-	private int rating;
+	private String usuario;
 
-	public Comentario(int id, String usuario, String texto, String fecha, int rating) {
-		this.id = id;
-		this.usuario = usuario;
-		this.texto = texto;
-		this.fecha = fecha;
-		this.rating = rating;
+	public Comentario(String vino, String comentario, int puntuacion, String fecha, String usuario){
+		super();
+		this.setVino(vino);
+		this.setComentario(comentario);
+		this.setPuntuacion(puntuacion);
+		this.setFecha(fecha);
+		this.setUsuario(usuario);
 	}
 
-	public String getUsuario() {
-		return usuario;
+	@Override
+	public String toString() {
+		return "Comentario{" +
+				"vino='" + vino + '\'' +
+				", comentario='" + comentario + '\'' +
+				", puntuacion=" + puntuacion +
+				", fecha='" + fecha + '\'' +
+				", usuario='" + usuario + '\'' +
+				'}';
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public String getComentario() {
+		return comentario;
 	}
 
-	public String getTexto() {
-		return texto;
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
-	public void setTexto(String texto) {
-		this.texto = texto;
+	public int getPuntuacion() {
+		return puntuacion;
+	}
+
+	public void setPuntuacion(int puntuacion) {
+		this.puntuacion = puntuacion;
 	}
 
 	public String getFecha() {
@@ -45,29 +56,19 @@ public class Comentario {
 		this.fecha = fecha;
 	}
 
-	public int getRating() {
-		return rating;
+	public String getVino() {
+		return vino;
 	}
 
-	public void setRating(int rating) {
-		this.rating = rating;
+	public void setVino(String vino) {
+		this.vino = vino;
 	}
 
-	@Override
-	public String toString() {
-		return "Comentario{" +
-				"usuario='" + usuario + '\'' +
-				", texto='" + texto + '\'' +
-				", fecha='" + fecha + '\'' +
-				", rating=" + rating +
-				'}';
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 }

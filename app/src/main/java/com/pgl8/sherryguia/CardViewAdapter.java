@@ -10,7 +10,11 @@ import android.widget.TextView;
 
 import com.pgl8.sherryguia.models.Comentario;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Custom adapter for the CardView.
@@ -35,10 +39,23 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.Custom
 	@Override
 	public void onBindViewHolder(CustomViewHolder holder, int position) {
 		Comentario comentario = comentarios.get(position);
-		holder.fecha.setText(comentario.getFecha());
+
+		String date;
+		Date date1 = null;
+		SimpleDateFormat inputFormatter1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+		try {
+			date1 = inputFormatter1.parse(comentario.getFecha());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+		date = format.format(date1);
+
+		holder.fecha.setText(date);
 		holder.usuario.setText(comentario.getUsuario());
-		holder.comentario.setText(comentario.getTexto());
-		holder.ratingBar.setRating(comentario.getRating());
+		holder.comentario.setText(comentario.getComentario());
+		holder.ratingBar.setRating(comentario.getPuntuacion());
 	}
 
 	@Override
@@ -51,7 +68,6 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.Custom
 		TextView usuario;
 		TextView comentario;
 		RatingBar ratingBar;
-
 
 		public CustomViewHolder(View itemView) {
 			super(itemView);

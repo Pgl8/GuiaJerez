@@ -23,7 +23,7 @@ import java.util.Scanner;
 
 public class DetailsActivity extends AppCompatActivity {
 	// URL local, cambiar a servidor.
-	private final String url = "http://192.168.1.34:8080/conexiondb/demo/vinoService/vino/";
+	private final String url = "http://192.168.1.130:8080/conexiondb/demo/vinoService/vino/";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
