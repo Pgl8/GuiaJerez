@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,6 +28,9 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
@@ -312,4 +316,30 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         super.onResume();
     }
 
+    public void sendUserJSON() {
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put("usuario", accountName);
+            json.put("imagen", accountName);
+            json.put("localizacion", mLocation);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (json.length() > 0) {
+            // Llamada a la clase para mandar el post
+            new SendJsonDataToServer().execute(String.valueOf(json));
+        }
+    }
+
+    private class SendJsonDataToServer extends AsyncTask<String, Void, String> {
+
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            return null;
+        }
+    }
 }
