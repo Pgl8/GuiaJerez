@@ -3,11 +3,9 @@ package com.pgl8.sherryguia;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -32,6 +30,11 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class PrincipalActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -43,8 +46,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     private boolean mConnected;
 	private TextView mTextView;
 	private ImageView mImageView;
-    public String accountName;
-    public String accountPhoto;
+    private String accountName;
+    private String accountPhoto;
     private Location mLocation;
 
     @Override
@@ -55,14 +58,10 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         setSupportActionBar(toolbar);
 
 		mTextView = (TextView) findViewById(R.id.textView);
-	    mImageView = (ImageView) findViewById(R.id.imageView);
+	    mImageView = (ImageView) findViewById(R.id.vinoImage);
 
         // Button listeners
-        //findViewById(R.id.sign_in_button);
         this.findViewById(R.id.sign_in_button).setOnClickListener(this);
-        //this.findViewById(R.id.sign_out_button).setOnClickListener(this);
-        //this.findViewById(R.id.disconnect_button).setOnClickListener(this);
-
 
 
         // Configure sign-in to request the user's ID, email address, and basic
@@ -98,8 +97,6 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         GPSTracker gps = new GPSTracker(this);
         if(gps.canGetLocation()){
             mLocation = gps.loc;
-            Toast.makeText(this, "Location: " + gps.getLatitude() + ", " + gps.getLongitude(), Toast.LENGTH_LONG).show();
-
         }
 
     }
@@ -176,6 +173,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             mConnected = true;
             updateUI(true);
 
+	        sendUserJSON(accountName, accountPhoto);
+
         } else {
             mConnected = false;
 
@@ -190,7 +189,6 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             Log.d(TAG, "Inside updateUI() signedIn");
             findViewById(R.id.sign_in_button).setVisibility(View.INVISIBLE);
 	        mImageView.setVisibility(View.VISIBLE);
-            //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
             findViewById(R.id.fab).setVisibility(View.VISIBLE);
 
         } else {
@@ -198,7 +196,6 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             mTextView.setText(R.string.inicia);
 	        mImageView.setVisibility(View.INVISIBLE);
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-	        //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
             findViewById(R.id.fab).setVisibility(View.INVISIBLE);
 
         }
@@ -231,20 +228,12 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
 
     @Override
     public void onClick(View v) {
-        Log.d(TAG, "Inside onClick()");
-        Log.d(TAG, "View: " + v.toString());
+
         switch (v.getId()) {
             case R.id.sign_in_button:
                 Log.d(TAG, "Inside onClick() sign in button");
                 signIn();
                 break;
-            /*case R.id.sign_out_button:
-                signOut();
-                break;
-            case R.id.disconnect_button:
-                revokeAccess();
-                Log.d(TAG, "Disconnect");
-                break;*/
         }
     }
 
@@ -316,30 +305,69 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         super.onResume();
     }
 
-    public void sendUserJSON() {
+    public void sendUserJSON(String accountName, String accountPhoto) {
         JSONObject json = new JSONObject();
 
         try {
+
             json.put("usuario", accountName);
-            json.put("imagen", accountName);
-            json.put("localizacion", mLocation);
+            json.put("imagen", accountPhoto);
+            json.put("localizacion", mLocation.getLatitude()+","+mLocation.getLongitude());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         if (json.length() > 0) {
-            // Llamada a la clase para mandar el post
+	        // Llamada a la clase para mandar el post
             new SendJsonDataToServer().execute(String.valueOf(json));
         }
     }
 
     private class SendJsonDataToServer extends AsyncTask<String, Void, String> {
 
-
+        private String urlPost = "http://92.222.216.247:8080/conexiondb/demo/vinoService/usuario";
+	    private String jsonResponse;
 
         @Override
         protected String doInBackground(String... params) {
-            return null;
+            try{
+                URL url = new URL(urlPost);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setUseCaches(false);
+                con.setDoOutput(true);
+                con.setDoInput(true);
+
+                con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                con.setRequestMethod("POST");
+
+	            Log.d(TAG, "doInBackground: "+params[0]);
+
+                byte[] sendBytes = params[0].getBytes("UTF-8");
+                con.setFixedLengthStreamingMode(sendBytes.length);
+
+                OutputStream outputStream = con.getOutputStream();
+                outputStream.write(sendBytes);
+
+                int httpResponse = con.getResponseCode();
+
+	            Log.d(TAG, "doInBackground: httpResponse: "+httpResponse);
+	            if (httpResponse >= HttpURLConnection.HTTP_OK
+                        && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                    Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                    jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                    scanner.close();
+                } else {
+                    Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                    jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                    scanner.close();
+                }
+
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+	        return jsonResponse;
+
         }
     }
 }
+

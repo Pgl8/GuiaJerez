@@ -19,17 +19,18 @@
 			android:layout_width="match_parent"
 			android:layout_height="200dp"
 			android:orientation="vertical"
-			android:background="#efefef">
+			android:background="#efefef"
+			android:layout_marginTop="20dp">
 
 			<RatingBar
-				android:id="@+id/ratingBar2"
+				android:id="@+id/ratingBar"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_centerHorizontal="true"
 				android:layout_centerVertical="true"/>
 
 			<EditText
-				android:id="@+id/editText"
+				android:id="@+id/comentarioText"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_alignParentBottom="true"
@@ -53,7 +54,7 @@
 				android:layout_height="wrap_content"
 				android:layout_alignParentEnd="true"
 				android:layout_alignParentRight="true"
-				android:layout_alignTop="@+id/editText"
+				android:layout_alignTop="@+id/comentarioText"
 				android:text="Enviar" />
 		</RelativeLayout>
 

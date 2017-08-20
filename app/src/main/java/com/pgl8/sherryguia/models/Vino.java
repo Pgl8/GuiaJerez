@@ -16,8 +16,10 @@ public class Vino {
 	private String nota_cata;
 	private String consumo;
 	private String vinedo;
+	private String url;
+	private String image;
 
-	public Vino(int id, String nombre, String descripcion, String tipoUva, String graduacion, String tipo, String contenido, String elaboracion, String notaCata, String consumo, String vinedo) {
+	public Vino(int id, String nombre, String descripcion, String tipoUva, String graduacion, String tipo, String contenido, String elaboracion, String notaCata, String consumo, String vinedo, String url, String image) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -29,6 +31,8 @@ public class Vino {
 		this.nota_cata = notaCata;
 		this.consumo = consumo;
 		this.vinedo = vinedo;
+		this.url = url;
+		this.image = image;
 	}
 
 	// Getters
@@ -62,12 +66,22 @@ public class Vino {
 	public String getVinedo() {
 		return vinedo;
 	}
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 }

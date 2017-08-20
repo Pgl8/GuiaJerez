@@ -8,11 +8,11 @@ package com.pgl8.sherryguia.models;
 public class Comentario {
 	private String vino;
 	private String comentario;
-	private int puntuacion;
+	private float puntuacion;
 	private String fecha;
 	private String usuario;
 
-	public Comentario(String vino, String comentario, int puntuacion, String fecha, String usuario){
+	public Comentario(String vino, String comentario, float puntuacion, String fecha, String usuario){
 		super();
 		this.setVino(vino);
 		this.setComentario(comentario);
@@ -40,11 +40,11 @@ public class Comentario {
 		this.comentario = comentario;
 	}
 
-	public int getPuntuacion() {
+	public float getPuntuacion() {
 		return puntuacion;
 	}
 
-	public void setPuntuacion(int puntuacion) {
+	public void setPuntuacion(float puntuacion) {
 		this.puntuacion = puntuacion;
 	}
 

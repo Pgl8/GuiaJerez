@@ -1,34 +1,37 @@
 package com.pgl8.sherryguia;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pgl8.sherryguia.models.Vino;
+import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
 public class DetailsActivity extends AppCompatActivity {
+	private static final String TAG = "DetailsActivity";
 	// URL local, cambiar a servidor.
-	private final String url = "http://192.168.1.130:8080/conexiondb/demo/vinoService/vino/";
+	private final String url = "http://92.222.216.247:8080/conexiondb/demo/vinoService/vino/";
+	ImageView vinoImagen;
+	private Vino vino;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details);
+
+		vinoImagen = (ImageView) findViewById(R.id.vinoImage);
 
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
@@ -106,7 +109,7 @@ public class DetailsActivity extends AppCompatActivity {
 				Toast.makeText(DetailsActivity.this, "Hubo un problema de conexión.", Toast.LENGTH_LONG).show();
 			}else{
 				Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-				Vino vino = gson.fromJson(jsonResponse, Vino.class);
+				vino = gson.fromJson(jsonResponse, Vino.class);
 
 				titulo.setText(vino.getNombre());
 				descripcion.setText(vino.getDescripcion());
@@ -118,6 +121,8 @@ public class DetailsActivity extends AppCompatActivity {
 				elaboracion.setText(vino.getElaboracion());
 				notasCata.setText(vino.getNotaCata());
 				consumo.setText(vino.getConsumo());
+				Log.d(TAG, "onPostExecute: " + vino.getImage());
+				Picasso.with(DetailsActivity.this).load(vino.getImage()).into(vinoImagen);
 			}
 		}
 	}
