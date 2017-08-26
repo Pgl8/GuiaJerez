@@ -1,8 +1,10 @@
 package com.pgl8.sherryguia;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,6 +17,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.pgl8.sherryguia.models.Vino;
+import com.squareup.picasso.Picasso;
 import com.wikitude.WikitudeSDK;
 import com.wikitude.WikitudeSDKStartupConfiguration;
 import com.wikitude.common.camera.CameraSettings;
@@ -24,6 +30,10 @@ import com.wikitude.rendering.ExternalRendering;
 import com.wikitude.tracker.ClientTracker;
 import com.wikitude.tracker.ClientTrackerEventListener;
 import com.wikitude.tracker.Tracker;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
 
 public class ExtendedTrackingActivity extends AppCompatActivity implements ClientTrackerEventListener, ExternalRendering {
 
@@ -37,8 +47,12 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 	private TextView wineName;
 	private Button button1;
 	private Button button2;
+	private Button button3;
 	public String accountName;
 	public String accountPhoto;
+	private final String url = "http://92.222.216.247:8080/conexiondb/demo/vinoService/vino/";
+	private Vino vino;
+	private String tiendaUrl;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +67,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		wineName = (TextView) findViewById(R.id.wineName);
 		button1 = (Button) findViewById(R.id.button);
 		button2 = (Button) findViewById(R.id.button2);
+		button3 = (Button) findViewById(R.id.button3);
 
 		Intent intent = getIntent();
 		accountName = intent.getStringExtra("accountName");
@@ -134,6 +149,14 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 				startActivity(intent1);
 			}
 		});
+
+		button3.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				new WebService().execute(url+targetName_);
+
+			}
+		});
 	}
 
 	@Override
@@ -149,9 +172,10 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 			public void run() {
 
 				wineName.setVisibility(View.INVISIBLE);
-				progressBar.setVisibility(View.INVISIBLE);
+				//progressBar.setVisibility(View.INVISIBLE);
 				button1.setVisibility(View.INVISIBLE);
 				button2.setVisibility(View.INVISIBLE);
+				button3.setVisibility(View.INVISIBLE);
 			}
 		});
 	}
@@ -186,12 +210,80 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 
 				wineName.setVisibility(View.VISIBLE);
 				wineName.setText(targetName_);
-				progressBar.setVisibility(View.VISIBLE);
+				//progressBar.setVisibility(View.VISIBLE);
 				button1.setVisibility(View.VISIBLE);
 				button2.setVisibility(View.VISIBLE);
+				button3.setVisibility(View.VISIBLE);
 			}
 		});
 	}
 
+	private class WebService extends AsyncTask<String, Void, String> {
+
+		private ProgressDialog mDialog = new ProgressDialog(ExtendedTrackingActivity.this);
+		private String message = null;
+		private String jsonResponse = null;
+
+		@Override
+		protected void onPreExecute() {
+
+			mDialog.setMessage("Cargando...");
+			mDialog.show();
+		}
+
+		@Override
+		protected String doInBackground(String... strings) {
+
+			try {
+
+				URL url = new URL(strings[0]);
+				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+				con.setUseCaches(false);
+
+				con.setRequestProperty("Content-Type", "application/json");
+				con.setRequestMethod("GET");
+
+				int httpResponse = con.getResponseCode();
+				message = String.valueOf(httpResponse);
+				Log.d("doInBackground: ", message);
+
+				if (httpResponse >= HttpURLConnection.HTTP_OK
+						&& httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+					Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+					jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+					scanner.close();
+					Log.d("HTTP_OK: ", jsonResponse);
+				} else {
+					Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+					jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+					scanner.close();
+					Log.d("HTTP_ERROR: ", jsonResponse);
+				}
+
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
+
+			Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+			vino = gson.fromJson(jsonResponse, Vino.class);
+			tiendaUrl = vino.getUrl();
+
+			return jsonResponse;
+		}
+
+		@Override
+		protected void onPostExecute(String jsonResponse) {
+
+			if(tiendaUrl != null) {
+				mDialog.dismiss();
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(tiendaUrl));
+				startActivity(intent);
+			}
+
+			if(jsonResponse.isEmpty())
+				Toast.makeText(ExtendedTrackingActivity.this, "Hubo un problema de conexión.", Toast.LENGTH_LONG).show();
+
+		}
+	}
 
 }
