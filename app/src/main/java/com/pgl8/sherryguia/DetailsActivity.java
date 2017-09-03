@@ -121,8 +121,7 @@ public class DetailsActivity extends AppCompatActivity {
 				elaboracion.setText(vino.getElaboracion());
 				notasCata.setText(vino.getNotaCata());
 				consumo.setText(vino.getConsumo());
-				Log.d(TAG, "onPostExecute: " + vino.getImage());
-				Picasso.with(DetailsActivity.this).load(vino.getImage()).into(vinoImagen);
+				Picasso.with(DetailsActivity.this).load(vino.getImagen()).resize(400, 800).into(vinoImagen);
 			}
 		}
 	}
