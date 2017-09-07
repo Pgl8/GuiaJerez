@@ -45,6 +45,7 @@ public class CommentsActivity extends AppCompatActivity {
 	private CardViewAdapter adaptador;
 	private ImageView imageView;
     private String urlGet = "http://92.222.216.247:8080/conexiondb/demo/vinoService/comentarios/";
+	private String urlAction = "http://92.222.216.247:8080/conexiondb/demo/vinoService/accion/";
 	private Button btnEnviar;
 	private RatingBar ratingBar;
 	private EditText comentarioText;
@@ -76,6 +77,9 @@ public class CommentsActivity extends AppCompatActivity {
 
         new WebService().execute(urlGet+wineName);
 
+		// Mandamos acción
+		sendActionJSON(accountName, wineName, "getComments");
+
 		btnEnviar.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -83,6 +87,7 @@ public class CommentsActivity extends AppCompatActivity {
 					comentarioText.setError("Debes escribir un comentario y puntuar.");
 				}else{
 					sendCommentJSON(wineName, accountName, comentarioText.getText().toString(), ratingBar.getRating());
+					sendActionJSON(accountName, wineName, "postComment");
 				}
 			}
 		});
@@ -111,6 +116,23 @@ public class CommentsActivity extends AppCompatActivity {
 		}
 	}
 
+	public void sendActionJSON(String accountName, String wineName, String action){
+		JSONObject json = new JSONObject();
+
+		try{
+			json.put("username", accountName);
+			json.put("wine", wineName);
+			json.put("action", action);
+
+			if (json.length() > 0) {
+				// Llamada a la clase para mandar el comentario
+				new SendActionJsonData().execute(String.valueOf(json));
+				Log.d(TAG, "sendActionJSON: " + json);
+			}
+		}catch (JSONException e){
+			e.printStackTrace();
+		}
+	}
 
 	// Clase interna para obtener el listado de comentarios sobre un vino
     private class WebService extends AsyncTask<String, Void, Void> {
@@ -241,6 +263,56 @@ public class CommentsActivity extends AppCompatActivity {
 			comentarioText.getText().clear();
 			ratingBar.setRating(0F);
 			new WebService().execute(urlGet+wineName);
+		}
+	}
+
+	private class SendActionJsonData extends AsyncTask<String, Void, String> {
+
+		private String urlPost = urlAction;
+		private String jsonResponse;
+		private int httpResponse = 0;
+
+		@Override
+		protected String doInBackground(String... params) {
+
+			try{
+				URL url = new URL(urlPost);
+				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+				con.setUseCaches(false);
+				con.setDoOutput(true);
+				con.setDoInput(true);
+
+				con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+				con.setRequestMethod("POST");
+
+				Log.d(TAG, "doInBackground: "+params[0]);
+
+				byte[] sendBytes = params[0].getBytes("UTF-8");
+				con.setFixedLengthStreamingMode(sendBytes.length);
+
+				OutputStream outputStream = con.getOutputStream();
+				outputStream.write(sendBytes);
+
+				httpResponse = con.getResponseCode();
+
+				Log.d(TAG, "doInBackground: httpResponse: "+httpResponse);
+				if (httpResponse >= HttpURLConnection.HTTP_OK
+						&& httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+					Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+					jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+					scanner.close();
+				} else {
+					Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+					jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+					scanner.close();
+				}
+
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
+
+			return jsonResponse;
+
 		}
 	}
 }

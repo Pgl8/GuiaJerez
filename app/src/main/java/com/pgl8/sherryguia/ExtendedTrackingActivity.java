@@ -31,6 +31,10 @@ import com.wikitude.tracker.ClientTracker;
 import com.wikitude.tracker.ClientTrackerEventListener;
 import com.wikitude.tracker.Tracker;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
@@ -51,6 +55,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 	public String accountName;
 	public String accountPhoto;
 	private final String url = "http://92.222.216.247:8080/conexiondb/demo/vinoService/vino/";
+	private String urlAction = "http://92.222.216.247:8080/conexiondb/demo/vinoService/accion/";
 	private Vino vino;
 	private String tiendaUrl;
 
@@ -60,7 +65,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		_wikitudeSDK = new WikitudeSDK(this);
 		WikitudeSDKStartupConfiguration startupConfiguration = new WikitudeSDKStartupConfiguration(WikitudeSDKConstants.WIKITUDE_SDK_KEY, CameraSettings.CameraPosition.BACK, CameraSettings.CameraFocusMode.CONTINUOUS);
 		_wikitudeSDK.onCreate(getApplicationContext(), this, startupConfiguration);
-		ClientTracker tracker = _wikitudeSDK.getTrackerManager().create2dClientTracker("file:///android_asset/tracker2.wtc");
+		ClientTracker tracker = _wikitudeSDK.getTrackerManager().create2dClientTracker("file:///android_asset/tracker3.wtc");
 		tracker.registerTrackerEventListener(this);
 
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -132,7 +137,7 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 			@Override
 			public void onClick(View view) {
 				Intent intent = new Intent(ExtendedTrackingActivity.this, DetailsActivity.class);
-				intent.putExtra("wine", targetName_);
+				intent.putExtra("wineName", targetName_);
 				intent.putExtra("accountName", accountName);
 				intent.putExtra("accountPhoto", accountPhoto);
 				startActivity(intent);
@@ -153,6 +158,8 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 		button3.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				// Mandamos acción
+				sendActionJSON(accountName, (String) wineName.getText(), "getShopURL");
 				new WebService().execute(url+targetName_);
 
 			}
@@ -216,6 +223,23 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 				button3.setVisibility(View.VISIBLE);
 			}
 		});
+	}
+
+	public void sendActionJSON(String accountName, String wineName, String action){
+		JSONObject json = new JSONObject();
+
+		try{
+			json.put("username", accountName);
+			json.put("wine", wineName);
+			json.put("action", action);
+
+			if (json.length() > 0) {
+				// Llamada a la clase para mandar el comentario
+				new SendActionJsonData().execute(String.valueOf(json));
+			}
+		}catch (JSONException e){
+			e.printStackTrace();
+		}
 	}
 
 	private class WebService extends AsyncTask<String, Void, String> {
@@ -282,6 +306,56 @@ public class ExtendedTrackingActivity extends AppCompatActivity implements Clien
 
 			if(jsonResponse.isEmpty())
 				Toast.makeText(ExtendedTrackingActivity.this, "Hubo un problema de conexión.", Toast.LENGTH_LONG).show();
+
+		}
+	}
+
+	private class SendActionJsonData extends AsyncTask<String, Void, String> {
+
+		private String urlPost = urlAction;
+		private String jsonResponse;
+		private int httpResponse = 0;
+
+		@Override
+		protected String doInBackground(String... params) {
+
+			try{
+				URL url = new URL(urlPost);
+				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+				con.setUseCaches(false);
+				con.setDoOutput(true);
+				con.setDoInput(true);
+
+				con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+				con.setRequestMethod("POST");
+				Log.d(TAG, "doInBackground: "+urlPost);
+				Log.d(TAG, "doInBackground: "+params[0]);
+
+				byte[] sendBytes = params[0].getBytes("UTF-8");
+				con.setFixedLengthStreamingMode(sendBytes.length);
+
+				OutputStream outputStream = con.getOutputStream();
+				outputStream.write(sendBytes);
+
+				httpResponse = con.getResponseCode();
+
+				Log.d(TAG, "doInBackground: httpResponse: "+httpResponse);
+				if (httpResponse >= HttpURLConnection.HTTP_OK
+						&& httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+					Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+					jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+					scanner.close();
+				} else {
+					Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+					jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+					scanner.close();
+				}
+
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
+
+			return jsonResponse;
 
 		}
 	}

@@ -98,6 +98,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         if(gps.canGetLocation()){
             mLocation = gps.loc;
         }
+        if(accountName != null && accountPhoto != null)
+            sendUserJSON(accountName, accountPhoto);
 
     }
 
@@ -173,7 +175,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             mConnected = true;
             updateUI(true);
 
-	        sendUserJSON(accountName, accountPhoto);
+	        //sendUserJSON(accountName, accountPhoto);
 
         } else {
             mConnected = false;

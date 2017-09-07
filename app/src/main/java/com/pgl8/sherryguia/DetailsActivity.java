@@ -15,16 +15,22 @@ import com.google.gson.GsonBuilder;
 import com.pgl8.sherryguia.models.Vino;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
 public class DetailsActivity extends AppCompatActivity {
 	private static final String TAG = "DetailsActivity";
-	// URL local, cambiar a servidor.
 	private final String url = "http://92.222.216.247:8080/conexiondb/demo/vinoService/vino/";
+	private String urlAction = "http://92.222.216.247:8080/conexiondb/demo/vinoService/accion/";
 	ImageView vinoImagen;
 	private Vino vino;
+	private String wineName;
+	private String accountName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +41,32 @@ public class DetailsActivity extends AppCompatActivity {
 
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
-		String wine = extras.getString("wine");
+		wineName = extras.getString("wineName");
+		accountName = extras.getString("accountName");
 
 		// Use AsyncTask execute Method To Prevent ANR Problem
-		new WebService().execute(url+wine);
+		new WebService().execute(url+wineName);
 
+		// Mandamos acción
+		sendActionJSON(accountName, extras.getString("wineName"), "getDetails");
+
+	}
+
+	public void sendActionJSON(String accountName, String wineName, String action){
+		JSONObject json = new JSONObject();
+
+		try{
+			json.put("username", accountName);
+			json.put("wine", wineName);
+			json.put("action", action);
+
+			if (json.length() > 0) {
+				// Llamada a la clase para mandar el comentario
+				new SendActionJsonData().execute(String.valueOf(json));
+			}
+		}catch (JSONException e){
+			e.printStackTrace();
+		}
 	}
 
 	private class WebService extends AsyncTask<String, Void, Void> {
@@ -123,6 +150,56 @@ public class DetailsActivity extends AppCompatActivity {
 				consumo.setText(vino.getConsumo());
 				Picasso.with(DetailsActivity.this).load(vino.getImagen()).resize(400, 800).into(vinoImagen);
 			}
+		}
+	}
+
+	private class SendActionJsonData extends AsyncTask<String, Void, String> {
+
+		private String urlPost = urlAction;
+		private String jsonResponse;
+		private int httpResponse = 0;
+
+		@Override
+		protected String doInBackground(String... params) {
+
+			try{
+				URL url = new URL(urlPost);
+				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+				con.setUseCaches(false);
+				con.setDoOutput(true);
+				con.setDoInput(true);
+
+				con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+				con.setRequestMethod("POST");
+				Log.d(TAG, "doInBackground: "+urlPost);
+				Log.d(TAG, "doInBackground: "+params[0]);
+
+				byte[] sendBytes = params[0].getBytes("UTF-8");
+				con.setFixedLengthStreamingMode(sendBytes.length);
+
+				OutputStream outputStream = con.getOutputStream();
+				outputStream.write(sendBytes);
+
+				httpResponse = con.getResponseCode();
+
+				Log.d(TAG, "doInBackground: httpResponse: "+httpResponse);
+				if (httpResponse >= HttpURLConnection.HTTP_OK
+						&& httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+					Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+					jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+					scanner.close();
+				} else {
+					Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+					jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+					scanner.close();
+				}
+
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
+
+			return jsonResponse;
+
 		}
 	}
 }
