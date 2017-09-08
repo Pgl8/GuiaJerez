@@ -1,8 +1,11 @@
 package com.pgl8.sherryguia;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -70,6 +73,10 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
                 .requestEmail()
                 .build();
 
+	    if(!isNetworkAvailable()){
+		    Toast.makeText(this, "No hay conexión a internet, por favor actívala.", Toast.LENGTH_LONG).show();
+	    }
+
         // Build a GoogleApiClient with access to the Google Sign-In API and the
         // options specified by gso.
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -81,8 +88,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Snackbar.make(view, "Start you VR Activity", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
+
                 Intent intent = new Intent(view.getContext(), ExtendedTrackingActivity.class);
                 intent.putExtra("accountName", accountName);
                 intent.putExtra("accountPhoto", accountPhoto);
@@ -142,7 +148,15 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     }
 // [END onActivityResult]
 
-    private void showProgressDialog() {
+	// Check if there is network available
+	private boolean isNetworkAvailable(){
+		ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+		return (networkInfo != null && networkInfo.isConnected());
+	}
+
+
+	private void showProgressDialog() {
         Log.d(TAG, "Inside showProgressDialog()");
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
