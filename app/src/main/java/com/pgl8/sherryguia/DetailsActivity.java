@@ -26,8 +26,8 @@ import java.util.Scanner;
 
 public class DetailsActivity extends AppCompatActivity {
 	private static final String TAG = "DetailsActivity";
-	private final String url = "http://192.168.1.35:8080/conexiondb/demo/vinoService/vino/";
-	private String urlAction = "http://192.168.1.35:8080/conexiondb/demo/vinoService/accion/";
+	private final String url = "http://92.222.216.247:8080/conexiondb/demo/vinoService/vino/";
+	private String urlAction = "http://92.222.216.247:8080/conexiondb/demo/vinoService/accion/";
 	ImageView vinoImagen;
 	private Vino vino;
 	private String wineName;

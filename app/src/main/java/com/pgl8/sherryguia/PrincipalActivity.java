@@ -341,7 +341,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
 
     private class SendJsonDataToServer extends AsyncTask<String, Void, String> {
 
-        private String urlPost = "http://192.168.1.35:8080/conexiondb/demo/vinoService/usuario";
+        private String urlPost = "http://92.222.216.247:8080/conexiondb/demo/vinoService/usuario";
 	    private String jsonResponse;
 
         @Override

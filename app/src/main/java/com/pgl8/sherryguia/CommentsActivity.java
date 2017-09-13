@@ -44,10 +44,8 @@ public class CommentsActivity extends AppCompatActivity {
 	private RecyclerView listaComentarios;
 	private CardViewAdapter adaptador;
 	private ImageView imageView;
-    //private String urlGet = "http://92.222.216.247:8080/conexiondb/demo/vinoService/comentarios/";
-	//private String urlAction = "http://92.222.216.247:8080/conexiondb/demo/vinoService/accion/";
-	private String urlGet = "http://192.168.1.35:8080/conexiondb/demo/vinoService/comentarios/";
-	private String urlAction = "http://192.168.1.35:8080/conexiondb/demo/vinoService/accion/";
+    private String urlGet = "http://92.222.216.247:8080/conexiondb/demo/vinoService/comentarios/";
+	private String urlAction = "http://92.222.216.247:8080/conexiondb/demo/vinoService/accion/";
 
 	private ImageButton btnEnviar;
 	private RatingBar ratingBar;
@@ -215,7 +213,7 @@ public class CommentsActivity extends AppCompatActivity {
 	 */
 	private class SendCommentJsonData extends AsyncTask<String, Void, String> {
 
-		private String urlPost = "http://192.168.1.35:8080/conexiondb/demo/vinoService/comentario";
+		private String urlPost = "http://92.222.216.247:8080/conexiondb/demo/vinoService/comentario";
 		private String jsonResponse;
 		private int httpResponse = 0;
 
