@@ -12,8 +12,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -44,9 +44,12 @@ public class CommentsActivity extends AppCompatActivity {
 	private RecyclerView listaComentarios;
 	private CardViewAdapter adaptador;
 	private ImageView imageView;
-    private String urlGet = "http://92.222.216.247:8080/conexiondb/demo/vinoService/comentarios/";
-	private String urlAction = "http://92.222.216.247:8080/conexiondb/demo/vinoService/accion/";
-	private Button btnEnviar;
+    //private String urlGet = "http://92.222.216.247:8080/conexiondb/demo/vinoService/comentarios/";
+	//private String urlAction = "http://92.222.216.247:8080/conexiondb/demo/vinoService/accion/";
+	private String urlGet = "http://192.168.1.35:8080/conexiondb/demo/vinoService/comentarios/";
+	private String urlAction = "http://192.168.1.35:8080/conexiondb/demo/vinoService/accion/";
+
+	private ImageButton btnEnviar;
 	private RatingBar ratingBar;
 	private EditText comentarioText;
 	public String accountName;
@@ -56,9 +59,10 @@ public class CommentsActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.activity_comments);
 		imageView = (ImageView) findViewById(R.id.imageComment);
-		btnEnviar = (Button) findViewById(R.id.buttonEnviar);
+		btnEnviar = (ImageButton) findViewById(R.id.buttonEnviar);
 		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 		comentarioText = (EditText) findViewById(R.id.comentarioText);
 
@@ -66,6 +70,8 @@ public class CommentsActivity extends AppCompatActivity {
 		accountName = intent.getStringExtra("accountName");
 		accountPhoto = intent.getStringExtra("accountPhoto");
         wineName = intent.getStringExtra("wineName");
+
+		setTitle(wineName);
 
 		Picasso.with(this).load(accountPhoto).resize(150, 150).transform(new CropCircleTransformation()).into(imageView);
 
@@ -202,9 +208,14 @@ public class CommentsActivity extends AppCompatActivity {
         }
     }
 
+	/**
+	 * Permite mandar al servicio web un JSON con los datos deseados
+	 * Parámetros a incluir:
+	 * - JSON
+	 */
 	private class SendCommentJsonData extends AsyncTask<String, Void, String> {
 
-		private String urlPost = "http://92.222.216.247:8080/conexiondb/demo/vinoService/comentario";
+		private String urlPost = "http://192.168.1.35:8080/conexiondb/demo/vinoService/comentario";
 		private String jsonResponse;
 		private int httpResponse = 0;
 

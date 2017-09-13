@@ -182,7 +182,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             GoogleSignInAccount acct = result.getSignInAccount();
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             accountName = acct.getDisplayName();
-            accountPhoto = acct.getPhotoUrl().toString();
+            accountPhoto = (acct.getPhotoUrl() != null) ? acct.getPhotoUrl().toString() : "http://92.222.216.247/sherryadmin/assets/dist/img/launcher.png";
 
 	        mTextView.setText(acct.getDisplayName());
 	        Picasso.with(this).load(acct.getPhotoUrl()).transform(new CropCircleTransformation()).into(mImageView);
@@ -341,7 +341,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
 
     private class SendJsonDataToServer extends AsyncTask<String, Void, String> {
 
-        private String urlPost = "http://92.222.216.247:8080/conexiondb/demo/vinoService/usuario";
+        private String urlPost = "http://192.168.1.35:8080/conexiondb/demo/vinoService/usuario";
 	    private String jsonResponse;
 
         @Override

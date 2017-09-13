@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +26,8 @@ import java.util.Scanner;
 
 public class DetailsActivity extends AppCompatActivity {
 	private static final String TAG = "DetailsActivity";
-	private final String url = "http://92.222.216.247:8080/conexiondb/demo/vinoService/vino/";
-	private String urlAction = "http://92.222.216.247:8080/conexiondb/demo/vinoService/accion/";
+	private final String url = "http://192.168.1.35:8080/conexiondb/demo/vinoService/vino/";
+	private String urlAction = "http://192.168.1.35:8080/conexiondb/demo/vinoService/accion/";
 	ImageView vinoImagen;
 	private Vino vino;
 	private String wineName;
@@ -130,7 +131,7 @@ public class DetailsActivity extends AppCompatActivity {
 		@Override
 		protected void onPostExecute(Void aVoid) {
 
-			mDialog.dismiss();
+
 
 			if(jsonResponse.isEmpty()){
 				Toast.makeText(DetailsActivity.this, "Hubo un problema de conexión.", Toast.LENGTH_LONG).show();
@@ -149,7 +150,33 @@ public class DetailsActivity extends AppCompatActivity {
 				notasCata.setText(vino.getNotaCata());
 				consumo.setText(vino.getConsumo());
 				Picasso.with(DetailsActivity.this).load(vino.getImagen()).resize(400, 800).into(vinoImagen);
+
+				titulo.setVisibility(View.VISIBLE);
+				descripcion.setVisibility(View.VISIBLE);
+				tipoUva.setVisibility(View.VISIBLE);
+				vinedo.setVisibility(View.VISIBLE);
+				graduacion.setVisibility(View.VISIBLE);
+				tipoVino.setVisibility(View.VISIBLE);
+				contenido.setVisibility(View.VISIBLE);
+				elaboracion.setVisibility(View.VISIBLE);
+				notasCata.setVisibility(View.VISIBLE);
+				consumo.setVisibility(View.VISIBLE);
+				vinoImagen.setVisibility(View.VISIBLE);
+
+				findViewById(R.id.textView1).setVisibility(View.VISIBLE);
+				findViewById(R.id.textView2).setVisibility(View.VISIBLE);
+				findViewById(R.id.textView3).setVisibility(View.VISIBLE);
+				findViewById(R.id.textView4).setVisibility(View.VISIBLE);
+				findViewById(R.id.textView5).setVisibility(View.VISIBLE);
+				findViewById(R.id.textView6).setVisibility(View.VISIBLE);
+				findViewById(R.id.textView7).setVisibility(View.VISIBLE);
+				findViewById(R.id.textView8).setVisibility(View.VISIBLE);
+				findViewById(R.id.textView9).setVisibility(View.VISIBLE);
+
 			}
+
+			mDialog.dismiss();
+
 		}
 	}
 
