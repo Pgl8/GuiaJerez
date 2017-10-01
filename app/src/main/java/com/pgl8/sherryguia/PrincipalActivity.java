@@ -84,6 +84,15 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
+        GPSTracker gps = new GPSTracker(this);
+        if(gps.canGetLocation()){
+            mLocation = gps.loc;
+        }
+        if(accountName != null /*&& accountPhoto != null*/) {
+
+            sendUserJSON(accountName, accountPhoto);
+        }
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,13 +109,6 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
 
         //SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
 
-        GPSTracker gps = new GPSTracker(this);
-        if(gps.canGetLocation()){
-            mLocation = gps.loc;
-        }
-        if(accountName != null && accountPhoto != null)
-            sendUserJSON(accountName, accountPhoto);
-
     }
 
     @Override
@@ -120,6 +122,16 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             Log.d(TAG, "Got cached sign-in");
             GoogleSignInResult result = opr.get();
             handleSignInResult(result);
+
+            GPSTracker gps = new GPSTracker(this);
+            if(gps.canGetLocation()){
+                mLocation = gps.loc;
+            }
+            if(accountName != null /*&& accountPhoto != null*/) {
+
+                sendUserJSON(accountName, accountPhoto);
+            }
+
         } else {
             // If the user has not previously signed in on this device or the sign-in has expired,
             // this asynchronous branch will attempt to sign in the user silently.  Cross-device
@@ -185,7 +197,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             accountPhoto = (acct.getPhotoUrl() != null) ? acct.getPhotoUrl().toString() : "http://92.222.216.247/sherryadmin/assets/dist/img/launcher.png";
 
 	        mTextView.setText(acct.getDisplayName());
-	        Picasso.with(this).load(acct.getPhotoUrl()).transform(new CropCircleTransformation()).into(mImageView);
+	        Picasso.with(this).load(accountPhoto).transform(new CropCircleTransformation()).into(mImageView);
             mConnected = true;
             updateUI(true);
 
@@ -323,12 +335,21 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
 
     public void sendUserJSON(String accountName, String accountPhoto) {
         JSONObject json = new JSONObject();
+        if(accountPhoto == null){
+            accountPhoto = "http://92.222.216.247/sherryadmin/assets/dist/img/launcher.png";
+        }
+
 
         try {
 
             json.put("usuario", accountName);
             json.put("imagen", accountPhoto);
-            json.put("localizacion", mLocation.getLatitude()+","+mLocation.getLongitude());
+            if(mLocation == null){
+                json.put("localizacion", "36.7025701,-6.1233665");
+            }else{
+                json.put("localizacion", mLocation.getLatitude()+","+mLocation.getLongitude());
+            }
+            Log.d(TAG, "sendUserJSON: "+json);
 
         } catch (JSONException e) {
             e.printStackTrace();
